@@ -16,4 +16,9 @@ export interface LexicaImage {
 
 export interface LexicaImageArray {
   data : LexicaImage[];
+  artstation : LexicaImage[];
+  fantasy : LexicaImage[];
+  surreal : LexicaImage[];
+  abstract : LexicaImage[];
+  digitalPainting : LexicaImage[];
 }

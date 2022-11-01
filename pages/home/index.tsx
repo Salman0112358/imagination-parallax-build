@@ -4,7 +4,7 @@ import { LexicaImage, LexicaImageArray } from "../../typescript";
 import createSFWImageArray from "../../utils/createSFWImageArray";
 import { url } from "inspector";
 
-const Home = ({ data }: LexicaImageArray) => {
+const Home = ({data}: LexicaImageArray) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [gridImageArray, setGridImageArray] = useState<LexicaImage[]>([]);
 
@@ -12,6 +12,8 @@ const Home = ({ data }: LexicaImageArray) => {
     setGridImageArray(createSFWImageArray(data));
     console.log("I have been called");
   }, [searchTerm]);
+
+
 
   return (
     <>
@@ -23,7 +25,7 @@ const Home = ({ data }: LexicaImageArray) => {
               image.height / image.width > 1 && "card-tall"
             } ${image.height / image.width < 1 && "card-wide"}   `}
             key={image.id}
-            style={{ backgroundImage: `url(${image.src})` }} 
+            style={{ backgroundImage: `url(${image.src})` }}
           >
             {}
           </div>
@@ -42,11 +44,22 @@ export default Home;
 
 export async function getServerSideProps() {
   // Fetch data from external API
-  const response = await axios.get(
-    `https://lexica.art/api/v1/search?q=artstation`
-  );
-  const data: LexicaImageArray = response.data.images;
+
+  const [artstation, fantasy, surreal, abstract, digitalPainting] = await Promise.all([
+    (await axios.get(`https://lexica.art/api/v1/search?q=artstation`)).data.images,
+    (await axios.get(`https://lexica.art/api/v1/search?q=fantasy`)).data.images,
+    (await axios.get(`https://lexica.art/api/v1/search?q=surreal`)).data.images,
+    (await axios.get(`https://lexica.art/api/v1/search?q=abstract`)).data.images,
+    (await axios.get(`https://lexica.art/api/v1/search?q=digital painting`)).data.images,
+  ]);
+
+  const data = [...artstation,...fantasy,...surreal,...abstract,...digitalPainting]
+  
+  // const response = await axios.get(
+  //   `https://lexica.art/api/v1/search?q=artstation`
+  // );
+  // const data: LexicaImageArray = response.data.images;
 
   // Pass data to the page via props
-  return { props: { data } };
+  return { props: { data} };
 }
