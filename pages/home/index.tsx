@@ -45,21 +45,14 @@ export default Home;
 export async function getServerSideProps() {
   // Fetch data from external API
 
-  const [artstation, fantasy, surreal, abstract, digitalPainting] = await Promise.all([
-    (await axios.get(`https://lexica.art/api/v1/search?q=artstation`)).data.images,
-    (await axios.get(`https://lexica.art/api/v1/search?q=fantasy`)).data.images,
-    (await axios.get(`https://lexica.art/api/v1/search?q=surreal`)).data.images,
-    (await axios.get(`https://lexica.art/api/v1/search?q=abstract`)).data.images,
-    (await axios.get(`https://lexica.art/api/v1/search?q=digital painting`)).data.images,
+  const data = await Promise.all([
+    ...(await axios.get(`https://lexica.art/api/v1/search?q=artstation`)).data.images,
+    ...(await axios.get(`https://lexica.art/api/v1/search?q=fantasy`)).data.images,
+    ...(await axios.get(`https://lexica.art/api/v1/search?q=surreal`)).data.images,
+    ...(await axios.get(`https://lexica.art/api/v1/search?q=abstract`)).data.images,
+    ...(await axios.get(`https://lexica.art/api/v1/search?q=digital painting`)).data.images,
   ]);
 
-  const data = [...artstation,...fantasy,...surreal,...abstract,...digitalPainting]
-  
-  // const response = await axios.get(
-  //   `https://lexica.art/api/v1/search?q=artstation`
-  // );
-  // const data: LexicaImageArray = response.data.images;
-
-  // Pass data to the page via props
+ 
   return { props: { data} };
 }
