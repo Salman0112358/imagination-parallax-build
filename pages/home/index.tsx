@@ -16,7 +16,7 @@ const Home = ({ data }: LexicaImageArray) => {
   useEffect(() => {
     setGridImageArray(createSFWImageArray(data));
     console.log("I have been called")
-  }, []);
+  }, [searchTerm]);
 
  const hanldeSearchTerm = (event : React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
@@ -45,10 +45,9 @@ const Home = ({ data }: LexicaImageArray) => {
 
 export default Home;
 
-export async function getServerSideProps(context : any) {
+export async function getServerSideProps() {
 
-  const search = context.params.search
-  console.log(search)
+  
   // Fetch data from external API
   const response = await axios.get(
     `https://lexica.art/api/v1/search?q=fantasy`

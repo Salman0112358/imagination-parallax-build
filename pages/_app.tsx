@@ -1,4 +1,5 @@
 // 1. import `NextUIProvider` component
+import '../styles/globals.css'
 import { NextUIProvider } from "@nextui-org/react";
 
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";

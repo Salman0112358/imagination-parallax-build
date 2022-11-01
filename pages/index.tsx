@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.css";
 export default function Home() {
   return (
     <>
-    <h1>This is the root page</h1>
+    <h1 className="text-black font-bold" >This is the root page</h1>
     </>
   )
 }
