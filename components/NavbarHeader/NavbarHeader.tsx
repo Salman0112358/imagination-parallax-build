@@ -15,22 +15,31 @@ const NavbarHeader = (): JSX.Element => {
   };
 
   return (
-    <header className="bg-[#3f056e] bg-opacity-70">
+    <header className="bg-[#3f056e] bg-opacity-80 font-light text-slate-50">
       <div className="flex items-center space-x-2 md:space-x-10">
-        <Image
-          src="https://cdn-icons-png.flaticon.com/512/1045/1045191.png"
-          width={100}
-          height={100}
-          className={"cursor-pointer object-contain"}
-          alt="whale icon"
-        />
+        <Link href="/">
+          <Image
+            src="https://cdn-icons-png.flaticon.com/512/1045/1045191.png"
+            width={100}
+            height={100}
+            className={"cursor-pointer object-contain"}
+            alt="whale icon"
+          />
+        </Link>
         <ul className="flex space-x-4">
-          <li className="headerLink">Explore</li>
-          <li className="headerLink">My Collection</li>
+          <li className="headerLink">
+            <Link href="/explore">Explore</Link>
+          </li>
+          <li className="headerLink">
+            {" "}
+            <Link href="/myCollection">My Collection</Link>
+          </li>
           {user ? (
             <>
-            <li>Welcome To The Imaginaton Parallax {user?.email}</li>
-            <li><button onClick={() => signOutUser()}>Sign Out</button></li>
+              <li>Welcome To The Imaginaton Parallax {user?.email}</li>
+              <li>
+                <button onClick={() => signOutUser()}>Sign Out</button>
+              </li>
             </>
           ) : (
             <li>
@@ -40,35 +49,6 @@ const NavbarHeader = (): JSX.Element => {
         </ul>
       </div>
     </header>
-    // <Navbar isBordered isCompact>
-    //   <Navbar.Brand as={Link} href="/home">
-    //     Home
-    //   </Navbar.Brand>
-    //   <Navbar.Content hideIn="xs" variant="highlight-rounded">
-    //     <Link href="/myCollection">My Collection</Link>
-    //     <Link href="/explore">Explore Users</Link>
-    //   </Navbar.Content>
-    //   <Navbar.Content>
-    //     {!user ? (
-    //       <Link href="/login">
-    //         <Button auto flat>
-    //           Login
-    //         </Button>
-    //       </Link>
-    //     ) : (
-    //       <>
-    //         <Navbar.Item>
-    //           <Text> Welcome To The Imagination Parallax {user?.email}</Text>
-    //         </Navbar.Item>
-    //         <Navbar.Item>
-    //           <Button auto flat onPress={() => signOutUser()}>
-    //             Sign Out
-    //           </Button>
-    //         </Navbar.Item>
-    //       </>
-    //     )}
-    //   </Navbar.Content>
-    // </Navbar>
   );
 };
 

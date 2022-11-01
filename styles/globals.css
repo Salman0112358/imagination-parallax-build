@@ -73,3 +73,24 @@ body {
   transform: translateY(-3px) scale(1.1);
 }
 
+
+
+@layer base {
+
+  body {
+  @apply
+  bg-[#141414]
+  }
+
+  header {
+
+    @apply 
+    fixed
+    top-0
+    z-50
+    flex
+    w-full
+    items-center
+  }
+
+}
