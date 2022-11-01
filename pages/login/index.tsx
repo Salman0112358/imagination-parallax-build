@@ -10,14 +10,17 @@ const Login : NextPage = () => {
     const router = useRouter();
 
     if (user) {
-        router.push("/home")
+        router.push("/")
     }
 
   return (
-    <Auth
-    appearance={{theme : ThemeSupa}}
-    supabaseClient={supabaseClient}
-    />
+    <div className='py-20'>
+
+      <Auth 
+      appearance={{theme : ThemeSupa}}
+      supabaseClient={supabaseClient}
+      />
+    </div>
   )
 }
 

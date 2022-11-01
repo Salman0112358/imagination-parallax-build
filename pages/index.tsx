@@ -5,14 +5,15 @@ import createSFWImageArray from "../utils/createSFWImageArray";
 import ImageGrid from "../components/ImageGrid/ImageGrid";
 import Head from "next/head";
 
+
 const Home = ({ data }: LexicaImageArray) => {
-  const [searchTerm, setSearchTerm] = useState("");
+  
   const [gridImageArray, setGridImageArray] = useState<LexicaImage[]>([]);
 
   useEffect(() => {
     setGridImageArray(createSFWImageArray(data));
     console.log("I have been called");
-  }, [searchTerm]);
+  }, [data]);
 
   return (
     <>
@@ -23,8 +24,7 @@ const Home = ({ data }: LexicaImageArray) => {
         </Head>
       </div>
       <main className="relative px-10 pb-24 lg:space-y-24">
-      <ImageGrid data={data} />
-
+        <ImageGrid data={gridImageArray} />
       </main>
     </>
   );

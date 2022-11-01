@@ -11,7 +11,7 @@ const NavbarHeader = (): JSX.Element => {
 
   const signOutUser = () => {
     supabaseClient.auth.signOut();
-    router.push("/home"); //sending the gang back to the root page
+    router.push("/"); //sending the gang back to the root page
   };
 
   return (
@@ -20,8 +20,8 @@ const NavbarHeader = (): JSX.Element => {
         <Link href="/">
           <Image
             src="https://cdn-icons-png.flaticon.com/512/1045/1045191.png"
-            width={100}
-            height={100}
+            width={45}
+            height={50}
             className={"cursor-pointer object-contain"}
             alt="whale icon"
           />
@@ -36,7 +36,7 @@ const NavbarHeader = (): JSX.Element => {
           </li>
           {user ? (
             <>
-              <li>Welcome To The Imaginaton Parallax {user?.email}</li>
+              <li className="font-semibold">Welcome To The Imaginaton Parallax [{user?.email}]</li>
               <li>
                 <button onClick={() => signOutUser()}>Sign Out</button>
               </li>
