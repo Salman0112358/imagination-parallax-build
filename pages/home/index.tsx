@@ -51,6 +51,10 @@ export async function getServerSideProps() {
     ...(await axios.get(`https://lexica.art/api/v1/search?q=surreal`)).data.images,
     ...(await axios.get(`https://lexica.art/api/v1/search?q=abstract`)).data.images,
     ...(await axios.get(`https://lexica.art/api/v1/search?q=digital painting`)).data.images,
+    ...(await axios.get(`https://lexica.art/api/v1/search?q=cyberpunk`)).data.images,
+    ...(await axios.get(`https://lexica.art/api/v1/search?q=huge scene`)).data.images,
+    ...(await axios.get(`https://lexica.art/api/v1/search?q=trending on artstation`)).data.images,
+    ...(await axios.get(`https://lexica.art/api/v1/search?q=wallpaper`)).data.images,
   ]);
 
  
