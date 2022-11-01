@@ -2,7 +2,7 @@ import { LexicaImage } from "../typescript";
 
 const cleanSFWImageArray = (data: LexicaImage[]) : LexicaImage[] => {
   const cleanArray = data.filter((element: LexicaImage) => (element.nsfw === false && element.grid === false));
-  return cleanArray
+  return cleanArray.sort(() =>  Math.random() - 0.5 )
 };
 
 export default cleanSFWImageArray;
