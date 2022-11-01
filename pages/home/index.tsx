@@ -1,44 +1,39 @@
 import React, { useEffect, useState } from "react";
-import type { NextPage } from "next";
-import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
-import { useRouter } from "next/router";
 import axios from "axios";
 import { LexicaImage, LexicaImageArray } from "../../typescript";
 import createSFWImageArray from "../../utils/createSFWImageArray";
+import { url } from "inspector";
 
 const Home = ({ data }: LexicaImageArray) => {
-  const supabaseClient = useSupabaseClient();
-  const user = useUser();
-  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [gridImageArray, setGridImageArray] = useState<LexicaImage[]>([]);
 
   useEffect(() => {
     setGridImageArray(createSFWImageArray(data));
-    console.log("I have been called")
+    console.log("I have been called");
   }, [searchTerm]);
-
- const hanldeSearchTerm = (event : React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault()
-    router.push(`/?term=${searchTerm}`)
- }
 
   return (
     <>
       <div>THe Home page for a logged in user</div>
-      <input 
-      type="text"
-      placeholder="search through stable diffusion"
-      value={searchTerm}
-      onChange={(event) => {
-        setSearchTerm(event.target.value);
-      }}
-       ></input>
-      <div className="grid grid-cols-3 gap-x-2 gap-y-3 grid-flow-row-dense">
+      <div className="photo-grid">
+        {gridImageArray.map((image) => (
+          <div
+            className={` cursor-pointer card ${
+              image.height / image.width > 1 && "card-tall"
+            } ${image.height / image.width < 1 && "card-wide"}   `}
+            key={image.id}
+            style={{ backgroundImage: `url(${image.src})` }} 
+          >
+            {}
+          </div>
+        ))}
+      </div>
+      {/* <div className="grid grid-cols-3 gap-x-2 gap-y-3 grid-flow-row-dense">
         {gridImageArray.map((image) => (
           <img src={image.src} key={image.id} />
         ))}
-      </div>
+      </div> */}
     </>
   );
 };
@@ -46,11 +41,9 @@ const Home = ({ data }: LexicaImageArray) => {
 export default Home;
 
 export async function getServerSideProps() {
-
-  
   // Fetch data from external API
   const response = await axios.get(
-    `https://lexica.art/api/v1/search?q=fantasy`
+    `https://lexica.art/api/v1/search?q=artstation`
   );
   const data: LexicaImageArray = response.data.images;
 
