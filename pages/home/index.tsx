@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { LexicaImage, LexicaImageArray } from "../../typescript";
 import createSFWImageArray from "../../utils/createSFWImageArray";
-import { url } from "inspector";
+import ImageGrid from "../../components/ImageGrid/ImageGrid";
+
 
 const Home = ({data}: LexicaImageArray) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -17,25 +18,7 @@ const Home = ({data}: LexicaImageArray) => {
 
   return (
     <>
-      <div>THe Home page for a logged in user</div>
-      <div className="photo-grid">
-        {gridImageArray.map((image) => (
-          <div
-            className={` cursor-pointer card ${
-              image.height / image.width > 1 && "card-tall"
-            } ${image.height / image.width < 1 && "card-wide"}   `}
-            key={image.id}
-            style={{ backgroundImage: `url(${image.src})` }}
-          >
-            {}
-          </div>
-        ))}
-      </div>
-      {/* <div className="grid grid-cols-3 gap-x-2 gap-y-3 grid-flow-row-dense">
-        {gridImageArray.map((image) => (
-          <img src={image.src} key={image.id} />
-        ))}
-      </div> */}
+      <ImageGrid data={data}/>
     </>
   );
 };
