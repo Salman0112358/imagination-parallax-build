@@ -20,16 +20,16 @@ const NavbarHeader = (): JSX.Element => {
         Home
       </Navbar.Brand>
       <Navbar.Content hideIn="xs" variant="highlight-rounded">
-        <Navbar.Link href="/myCollection">My Collection</Navbar.Link>
-        <Navbar.Link href="/explore">Explore Users</Navbar.Link>
+        <Link href="/myCollection">My Collection</Link>
+        <Link href="/explore">Explore Users</Link>
       </Navbar.Content>
       <Navbar.Content>
         {!user ? (
-          <Navbar.Link href="/login">
+          <Link href="/login">
             <Button auto flat>
               Login
             </Button>
-          </Navbar.Link>
+          </Link>
         ) : (
           <>
             <Navbar.Item>
