@@ -57,7 +57,7 @@ export default function HeadlessModal({ image }: singleImage) {
               >
                 <Dialog.Panel className={` ${image.width > image.height ? 'w-[90vh]' : 'w-[50vh]'} transform overflow-hidden rounded-2xl bg-black text-slate-100 p-6 text-left align-middle shadow-xl transition-all`}>
                   <div className="flex flex-col">
-                    <img className="rounded-md" src={image.src} />
+                    <img className="rounded-md" src={image.src} alt="AI Art" />
                   </div>
                   <div className="mt-2">
                     <p className="text-sm">{image.prompt}</p>
