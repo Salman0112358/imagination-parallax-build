@@ -1,6 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { singleImage } from "../../typescript";
+import { toast} from 'react-toastify';
+
 import Image from "next/image";
 
 export default function HeadlessModal({ image }: singleImage) {
@@ -9,6 +11,8 @@ export default function HeadlessModal({ image }: singleImage) {
   const handleCopy = (promptText: string) => {
     navigator.clipboard.writeText(promptText);
   };
+
+  const notify = () => toast("Prompt Copied To Clipboard");
 
   function closeModal() {
     setIsOpen(false);
@@ -55,7 +59,11 @@ export default function HeadlessModal({ image }: singleImage) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className={` ${image.width > image.height ? 'w-[90vh]' : 'w-[50vh]'} transform overflow-hidden rounded-2xl bg-black text-slate-100 p-6 text-left align-middle shadow-xl transition-all`}>
+                <Dialog.Panel
+                  className={` ${
+                    image.width > image.height ? "w-[90vh]" : "w-[50vh]"
+                  } transform overflow-hidden rounded-2xl bg-black text-slate-100 p-6 text-left align-middle shadow-xl transition-all`}
+                >
                   <div className="flex flex-col">
                     <img className="rounded-md" src={image.src} alt="AI Art" />
                   </div>
@@ -74,7 +82,10 @@ export default function HeadlessModal({ image }: singleImage) {
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-violet-900 px-4 py-2 text-sm font-medium text-slate-100 hover:bg-violet-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={() => handleCopy(image.prompt)}
+                      onClick={() => {
+                        handleCopy(image.prompt);
+                        notify()
+                      }}
                     >
                       Copy Prompt
                     </button>
