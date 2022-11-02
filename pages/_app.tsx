@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <NavbarHeader />
         <Component {...pageProps} />
       </SessionContextProvider>
-      <ToastContainer
+      {/* <ToastContainer
         position="top-center"
         autoClose={2000}
         hideProgressBar={false}
@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
         draggable
         pauseOnHover
         theme="dark"
-      />
+      /> */}
     </>
   );
 }
