@@ -15,7 +15,7 @@ const NavbarHeader = (): JSX.Element => {
   };
 
   return (
-    <header className="bg-[#3f056e] bg-opacity-80 font-light text-slate-50">
+    <header className="fixed bg-[#3f056e] bg-opacity-80 font-light text-slate-50">
       <div className="flex items-center space-x-2 md:space-x-10">
         <Link href="/">
           <Image
@@ -33,6 +33,10 @@ const NavbarHeader = (): JSX.Element => {
           <li className="headerLink">
             {" "}
             <Link href="/myCollection">My Collection</Link>
+          </li>
+          <li className="headerLink">
+            {" "}
+            <Link href="/promptbuilder">Imagine</Link>
           </li>
           {user ? (
             <>
