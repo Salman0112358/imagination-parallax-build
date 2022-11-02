@@ -55,8 +55,8 @@ export default function HeadlessModal({ image }: singleImage) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-black text-slate-100 p-6 text-left align-middle shadow-xl transition-all">
-                  <div>
+                <Dialog.Panel className={` ${image.width > image.height ? 'w-[90vh]' : 'w-[50vh]'} transform overflow-hidden rounded-2xl bg-black text-slate-100 p-6 text-left align-middle shadow-xl transition-all`}>
+                  <div className="flex flex-col">
                     <img className="rounded-md" src={image.src} />
                   </div>
                   <div className="mt-2">

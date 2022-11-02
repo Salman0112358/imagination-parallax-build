@@ -17,7 +17,7 @@ const Home = ({ data }: LexicaImageArray) => {
 
   return (
     <>
-      <div className="relative h-[15vh] bg-gradient-to-b">
+      <div className="relative h-[10vh] bg-gradient-to-b">
         <Head>
           <title>Home</title>
           <link rel="icon" href="/favicon.ico" />
