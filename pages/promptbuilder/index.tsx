@@ -3,11 +3,13 @@ import Head from "next/head";
 import React, { useState } from "react";
 
 const PromptBuilder = () => {
+
   const [instancePrompt, setInstancePrompt] = useState("");
   const [classPrompt, setClassPrompt] = useState("");
+
   const user = useUser();
 
-  console.log(instancePrompt,classPrompt)
+
 
   return (
     <>
@@ -18,6 +20,7 @@ const PromptBuilder = () => {
       <main>
         {user && (
           <div className=" absolute inset-x-0 top-20 flex flex-col justify-center items-center space-y-5">
+            <h1 className="text-slate-500 font-semibold text-2xl">Insert your instance and class into the list of prompts</h1>
             <div className="rounded-md bg-black bg-opacity-20 px-8 py-6 text-sm font-medium hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
               <div className="flex flex-row">
                 <input
@@ -37,17 +40,15 @@ const PromptBuilder = () => {
               </div>
             </div>
             <div className="promptListWrapper text-slate-500">
-            <ul>
+              <ul>
                 <li>prompt 1</li>
                 <li>prompt 1</li>
                 <li>prompt 1</li>
                 <li>prompt 1</li>
-            </ul>
-
-        </div>
+              </ul>
+            </div>
           </div>
         )}
-       
       </main>
     </>
   );
