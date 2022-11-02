@@ -4,24 +4,28 @@ import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import {Auth, ThemeSupa} from "@supabase/auth-ui-react"
 
-const Login : NextPage = () => {
-    const supabaseClient = useSupabaseClient();
-    const user = useUser();
-    const router = useRouter();
+const Login: NextPage = () => {
 
-    if (user) {
-        router.push("/")
-    }
+  const supabaseClient = useSupabaseClient();
+  const user = useUser();
+  const router = useRouter();
 
-  return (
-    <div className='py-20'>
-
-      <Auth 
-      appearance={{theme : ThemeSupa}}
-      supabaseClient={supabaseClient}
-      />
-    </div>
-  )
+  if (user) {
+    router.push("/")
 }
 
-export default Login
+  return (
+    <div className=" flex justify-center items-center h-screen w-screen">
+      <div className=" w-1/4">
+        <Auth
+          supabaseClient={supabaseClient}
+          appearance={{ theme: ThemeSupa }}
+          theme="dark"
+          providers={["discord"]}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Login;
