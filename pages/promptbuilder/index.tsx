@@ -1,4 +1,5 @@
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
+import Compressor from "compressorjs";
 import { supabase } from "../../utils/supabaseClient";
 import { IoMdCopy } from "react-icons/io";
 import { useRouter } from "next/router";
@@ -8,14 +9,6 @@ import React, { useEffect, useState } from "react";
 import { IPrompt } from "../../typescript";
 import handleCopy from "../../utils/handleCopy";
 import replaceInstanceAndClass from "../../utils/replaceInstanceAndClass";
-
-const people = [
-  { id: 1, name: "Durward Reynolds", unavailable: false },
-  { id: 2, name: "Kenton Towne", unavailable: false },
-  { id: 3, name: "Therese Wunsch", unavailable: false },
-  { id: 4, name: "Benedict Kessler", unavailable: true },
-  { id: 5, name: "Katelyn Rohan", unavailable: false },
-];
 
 const PromptBuilder = ({ data }: any) => {
   const [instancePrompt, setInstancePrompt] = useState("");
@@ -36,6 +29,52 @@ const PromptBuilder = ({ data }: any) => {
     setClassPrompt("");
   };
 
+  const handleImageUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): Promise<void> => {
+
+   
+
+    if (user && e.target.files) {
+      const chosenFile: File = e.target.files[0];
+
+     
+      new Compressor(chosenFile, {
+        convertSize : 200,
+        convertTypes: 'image/png,image/webp',
+        quality: 0.8,
+
+    
+        // The compression process is asynchronous,
+        // which means you have to access the `result` in the `success` hook function.
+        async success(result) {
+          const formData = new FormData();
+    
+          // The third parameter is required for server
+          formData.append('file', result, "imageman");
+
+          const { data, error } = await supabase.storage
+          .from("user-images")
+          .upload(`images/${user.id}/` + chosenFile.name + '-' + new Date(), formData, {
+            cacheControl: "3600",
+            upsert: false,
+          });
+
+          console.log('Upload success');
+          
+        },
+        error(err) {
+          console.log(err.message);
+        },
+      });
+
+
+
+
+     
+    }
+  };
+
   const refreshPromptList = () => {
     router.replace(router.asPath);
   };
@@ -50,7 +89,6 @@ const PromptBuilder = ({ data }: any) => {
     ]);
 
     setPromptIdea("");
-    console.log("Prompt Submitted");
   };
 
   return (
@@ -87,6 +125,7 @@ const PromptBuilder = ({ data }: any) => {
                   id="upload-render"
                   accept="image/png, image/jpeg"
                   className="hidden"
+                  onChange={handleImageUpload}
                 />
 
                 <button
