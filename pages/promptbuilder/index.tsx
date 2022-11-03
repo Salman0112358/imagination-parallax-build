@@ -45,7 +45,7 @@ const PromptBuilder = ({ data }: any) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        {user && (
+        
           <div className=" absolute inset-x-0 top-20 flex flex-col justify-center items-center space-y-5">
             <h1 className="text-slate-500 font-semibold text-2xl">
               Submit A Prompt Idea
@@ -110,7 +110,6 @@ const PromptBuilder = ({ data }: any) => {
               </ul>
             </div>
           </div>
-        )}
       </main>
     </>
   );
