@@ -1,9 +1,11 @@
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { supabase } from "../../utils/supabaseClient";
+import { IoMdCopy } from "react-icons/io";
 
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import { IPrompt } from "../../typescript";
+import handleCopy from "../../utils/handleCopy";
 
 const PromptBuilder = ({ data }: any) => {
   const [instancePrompt, setInstancePrompt] = useState("");
@@ -91,8 +93,18 @@ const PromptBuilder = ({ data }: any) => {
             <div className="promptListWrapper text-slate-500">
               <ul className="space-y-5">
                 {promptArray.map((prompt: IPrompt) => (
-                  <div className="outlineBox" key={prompt.id}>
-                    <p>{prompt.prompt}</p>
+                  <div
+                    className="outlineBox  flex flex-row"
+                    key={prompt.id}
+                  >
+                    <div className=" w-4/5">{prompt.prompt}</div>
+                    <div className=" relative w-1/5">
+                      <IoMdCopy
+                        fill="white"
+                        className="absolute text-slate-500  inset-y-0 right-0 cursor-pointer"
+                        onClick={() => handleCopy(prompt.prompt) }
+                      />
+                    </div>
                   </div>
                 ))}
               </ul>

@@ -4,13 +4,12 @@ import { singleImage } from "../../typescript";
 import { toast} from 'react-toastify';
 
 import Image from "next/image";
+import handleCopy from "../../utils/handleCopy";
 
 export default function HeadlessModal({ image }: singleImage) {
   let [isOpen, setIsOpen] = useState(false);
 
-  const handleCopy = (promptText: string) => {
-    navigator.clipboard.writeText(promptText);
-  };
+
 
   const notify = () => toast("Prompt Copied To Clipboard");
 
