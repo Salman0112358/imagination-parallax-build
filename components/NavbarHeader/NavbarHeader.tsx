@@ -22,13 +22,13 @@ const NavbarHeader = (): JSX.Element => {
             src="https://cdn-icons-png.flaticon.com/512/1045/1045191.png"
             width={45}
             height={50}
-            className={"cursor-pointer object-contain"}
+            className={"cursor-pointer object-contain m-2"}
             alt="whale icon"
           />
         </Link>
         <ul className="flex space-x-4">
           <li className="headerLink">
-            <Link href="/explore">Explore</Link>
+            <Link href="/">Home</Link>
           </li>
           <li className="headerLink">
             {" "}
