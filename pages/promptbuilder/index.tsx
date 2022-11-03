@@ -22,7 +22,6 @@ const PromptBuilder = ({ data }: any) => {
   const [classPrompt, setClassPrompt] = useState("");
   const [promptArray, setPromptArray] = useState<IPrompt[]>([]);
   const [promptIdea, setPromptIdea] = useState("");
-  const [selected, setSelected] = useState(people[0]);
 
   useEffect(() => {
     setPromptArray(data);
@@ -68,13 +67,28 @@ const PromptBuilder = ({ data }: any) => {
                 <textarea
                   className="promptTextArea w-[100vh]"
                   name="prompt"
-                  maxLength={75}
+                  maxLength={168}
                   placeholder="Enter your prompt ideas here"
                   rows={6}
                   value={promptIdea}
                   onChange={(event) => setPromptIdea(event.target.value)}
                 />
-                <button className="submitPromptButton">Upload Render</button>
+                <button
+                  className="submitPromptButton"
+                  onClick={() =>
+                    document.getElementById("upload-render")?.click()
+                  }
+                >
+                  Upload Render
+                </button>
+                <input
+                  type="file"
+                  name="render"
+                  id="upload-render"
+                  accept="image/png, image/jpeg"
+                  className="hidden"
+                />
+
                 <button
                   className="submitPromptButton"
                   onClick={async () => {
@@ -117,7 +131,10 @@ const PromptBuilder = ({ data }: any) => {
           <div className="promptListWrapper text-slate-500">
             <ul className="space-y-5">
               {promptArray.map((prompt: IPrompt) => (
-                <div className="outlineBox cursor-pointer border-2 border-violet-300 hover:border-violet-900  flex flex-row" key={prompt.id}>
+                <div
+                  className="outlineBox cursor-pointer border-2 border-violet-300 hover:border-violet-900  flex flex-row"
+                  key={prompt.id}
+                >
                   <div className=" w-4/5 h-10 text-base text-violet-300">
                     {replaceInstanceAndClass(
                       prompt.prompt,
