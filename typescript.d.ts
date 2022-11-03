@@ -38,3 +38,11 @@ export interface singleImage {
   }
 
 }
+
+export interface IPrompt {
+  id : number;
+  inserted_at : string;
+  prompt : string;
+  render_image : string;
+  user_id : string;
+}
