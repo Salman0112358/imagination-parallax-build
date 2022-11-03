@@ -6,6 +6,7 @@ import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import { IPrompt } from "../../typescript";
 import handleCopy from "../../utils/handleCopy";
+import replaceInstanceAndClass from "../../utils/replaceInstanceAndClass";
 
 const PromptBuilder = ({ data }: any) => {
   const [instancePrompt, setInstancePrompt] = useState("");
@@ -47,9 +48,6 @@ const PromptBuilder = ({ data }: any) => {
       <main>
         
           <div className=" absolute inset-x-0 top-20 flex flex-col justify-center items-center space-y-5">
-            <h1 className="text-slate-500 font-semibold text-2xl">
-              Submit A Prompt Idea
-            </h1>
             <div className="outlineBox">
               <div className="flex flex-row">
                 <textarea
@@ -97,7 +95,7 @@ const PromptBuilder = ({ data }: any) => {
                     className="outlineBox  flex flex-row"
                     key={prompt.id}
                   >
-                    <div className=" w-4/5">{prompt.prompt}</div>
+                    <div className=" w-4/5">{replaceInstanceAndClass(prompt.prompt , instancePrompt, classPrompt)}</div>
                     <div className=" relative w-1/5">
                       <IoMdCopy
                         fill="white"
