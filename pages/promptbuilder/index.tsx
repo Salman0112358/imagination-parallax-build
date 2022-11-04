@@ -2,7 +2,10 @@ import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import Compressor from "compressorjs";
 import { supabase } from "../../utils/supabaseClient";
 import { IoMdCopy } from "react-icons/io";
+import { ImCross } from "react-icons/im";
 import { useRouter } from "next/router";
+import LoadingImage from "../../assets/images/Loading-Preview.gif";
+import Image from "next/image";
 
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
@@ -15,6 +18,8 @@ const PromptBuilder = ({ data }: any) => {
   const [classPrompt, setClassPrompt] = useState("");
   const [promptArray, setPromptArray] = useState<IPrompt[]>([]);
   const [promptIdea, setPromptIdea] = useState("");
+  const [previewImageUrl, setPreviewImageUrl] = useState<string>("");
+  const [uploadFile, setUploadFile] = useState<File | null>();
 
   useEffect(() => {
     setPromptArray(data);
@@ -29,49 +34,57 @@ const PromptBuilder = ({ data }: any) => {
     setClassPrompt("");
   };
 
-  const handleImageUpload = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ): Promise<void> => {
+  const handleRemoveImagePreview = () => {
+    setPreviewImageUrl("");
+  };
 
-   
-
+  const handleImagePreview = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (user && e.target.files) {
       const chosenFile: File = e.target.files[0];
 
-     
-      new Compressor(chosenFile, {
-        convertSize : 200,
-        convertTypes: 'image/png,image/webp',
+      if (chosenFile) {
+        setPreviewImageUrl(URL.createObjectURL(chosenFile));
+        setUploadFile(chosenFile);
+      } else {
+        setPreviewImageUrl(previewImageUrl);
+      }
+    }
+  };
+
+  const handleImageFileUpload = async (inputFile: File) => {
+    if (user && inputFile) {
+      new Compressor(inputFile, {
+        convertSize: 200,
+        convertTypes: "image/png,image/webp",
         quality: 0.8,
 
-    
         // The compression process is asynchronous,
         // which means you have to access the `result` in the `success` hook function.
         async success(result) {
           const formData = new FormData();
-    
+
           // The third parameter is required for server
-          formData.append('file', result, "imageman");
+          formData.append("file", result, "imageman");
 
           const { data, error } = await supabase.storage
-          .from("user-images")
-          .upload(`images/${user.id}/` + chosenFile.name + '-' + new Date(), formData, {
-            cacheControl: "3600",
-            upsert: false,
-          });
+            .from("user-images")
+            .upload(
+              `images/${user.id}/` + inputFile.name + "-" + new Date(),
+              formData,
+              {
+                cacheControl: "3600",
+                upsert: false,
+              }
+            );
 
-          console.log('Upload success');
-          
+          console.log("Compression success");
+          setPreviewImageUrl("");
+          setUploadFile(null);
         },
         error(err) {
           console.log(err.message);
         },
       });
-
-
-
-
-     
     }
   };
 
@@ -80,15 +93,23 @@ const PromptBuilder = ({ data }: any) => {
   };
 
   const handlePromptSubmission = async () => {
-    const { data, error } = await supabaseClient.from("prompts").insert([
-      {
-        prompt: promptIdea,
-        render_image: "",
-        user_id: user?.id,
-      },
-    ]);
+    if (!promptIdea) {
+      window.alert("You Must Have A Prompt With A Preview Image To Submit!");
+    } else {
+      const { data, error } = await supabaseClient.from("prompts").insert([
+        {
+          prompt: promptIdea,
+          render_image: "",
+          user_id: user?.id,
+        },
+      ]);
 
-    setPromptIdea("");
+      setPromptIdea("");
+
+      if (uploadFile) {
+        await handleImageFileUpload(uploadFile);
+      }
+    }
   };
 
   return (
@@ -99,51 +120,79 @@ const PromptBuilder = ({ data }: any) => {
       </Head>
       <main>
         <div className=" absolute inset-x-0 top-20 flex flex-col justify-center items-center space-y-5">
-          <div className="outlineBox">
-            <div className="flex flex-col">
-              <div className="flex flex-row">
-                <textarea
-                  className="promptTextArea w-[100vh]"
-                  name="prompt"
-                  maxLength={168}
-                  placeholder="Enter your prompt ideas here"
-                  rows={6}
-                  value={promptIdea}
-                  onChange={(event) => setPromptIdea(event.target.value)}
-                />
-                <button
-                  className="submitPromptButton"
-                  onClick={() =>
-                    document.getElementById("upload-render")?.click()
-                  }
-                >
-                  Upload Render
-                </button>
+          <div className="flex flex-row space-x-10">
+            <div className="outlineBox">
+              <div className="flex flex-col">
+                <div className="flex flex-row">
+                  <textarea
+                    className="promptTextArea w-[70vh]"
+                    name="prompt"
+                    maxLength={168}
+                    placeholder="Enter your prompt ideas here"
+                    rows={6}
+                    value={promptIdea}
+                    onChange={(event) => setPromptIdea(event.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="flex flex-row mt-2 justify-center">
                 <input
                   type="file"
                   name="render"
                   id="upload-render"
                   accept="image/png, image/jpeg"
                   className="hidden"
-                  onChange={handleImageUpload}
+                  onChange={handleImagePreview}
                 />
 
-                <button
-                  className="submitPromptButton"
-                  onClick={async () => {
-                    await handlePromptSubmission();
-                    refreshPromptList();
-                  }}
-                >
-                  Submit Prompt
-                </button>
-              </div>
-              <div className="flex flex-row">
                 <button className="submitPromptButton py-2">
                   Artist Ideas
                 </button>
                 <button className="submitPromptButton py-2">Composition</button>
+                <button
+                  className="submitPromptButton"
+                  onClick={() =>
+                    document.getElementById("upload-render")?.click()
+                  }
+                >
+                  Preview Render
+                </button>
+                {!previewImageUrl && (
+                  <button
+                    className="submitPromptButton"
+                    onClick={async () => {
+                      await handlePromptSubmission();
+                      refreshPromptList();
+                    }}
+                  >
+                    Submit Prompt
+                  </button>
+                )}
               </div>
+            </div>
+            <div className="relative outlineBox text-violet-300">
+              {previewImageUrl && (
+                <ImCross
+                  className="absolute right-10 cursor-pointer top-[3vh]"
+                  onClick={handleRemoveImagePreview}
+                />
+              )}
+              {previewImageUrl && (
+                <button
+                  className="absolute submitPromptButton bg-violet-900 text-slate-100 bottom-0 inset-x-0"
+                  onClick={handlePromptSubmission}
+                >
+                  Submit Prompt
+                </button>
+              )}
+
+              <Image
+                src={previewImageUrl ? previewImageUrl : LoadingImage}
+                alt="render preview"
+                width={512}
+                height={512}
+                className="rounded-lg"
+              />
             </div>
           </div>
 

@@ -4,7 +4,7 @@ const nextConfig = {
     appDir: true,
   },
   images : {
-    domains : ['cdn-icons-png.flaticon.com',"images4.alphacoders.com","lexica-serve-encoded-images.sharif.workers.dev"]
+    domains : ['cdn-icons-png.flaticon.com',"images4.alphacoders.com","lexica-serve-encoded-images.sharif.workers.dev","cdn.dribbble.com"]
   }
 
 }
