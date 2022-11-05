@@ -14,6 +14,7 @@ import handleCopy from "../../utils/handleCopy";
 import replaceInstanceAndClass from "../../utils/replaceInstanceAndClass";
 
 import PromptList from "../../components/PromptList/PromptList";
+import PromptInstanceAndClassInput from "../../components/PromptInstanceAndClassInput/PromptInstanceAndClassInput";
 
 const PromptBuilder = ({ data }: any) => {
   const [instancePrompt, setInstancePrompt] = useState("");
@@ -30,11 +31,6 @@ const PromptBuilder = ({ data }: any) => {
   const router = useRouter();
   const supabaseClient = useSupabaseClient();
   const user = useUser();
-
-  const handleClear = () => {
-    setInstancePrompt("");
-    setClassPrompt("");
-  };
 
   const handleRemoveImagePreview = () => {
     setPreviewImageUrl("");
@@ -201,25 +197,12 @@ const PromptBuilder = ({ data }: any) => {
             </div>
           </div>
 
-          <div className="outlineBox w-[150vh]">
-            <div className="flex flex-row">
-              <input
-                className="promptInput"
-                placeholder="Instance Prompt"
-                value={instancePrompt}
-                onChange={(event) => setInstancePrompt(event.target.value)}
-              />
-              <input
-                className="promptInput"
-                placeholder="Class Prompt"
-                value={classPrompt}
-                onChange={(event) => setClassPrompt(event.target.value)}
-              />
-              <button className="submitPromptButton" onClick={handleClear}>
-                Clear
-              </button>
-            </div>
-          </div>
+          <PromptInstanceAndClassInput
+            instancePrompt={instancePrompt}
+            classPrompt={classPrompt}
+            setInstancePrompt={setInstancePrompt}
+            setClassPrompt={setClassPrompt}
+          />
 
           <PromptList
             promptArray={promptArray}
