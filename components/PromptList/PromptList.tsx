@@ -1,20 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdCopy } from "react-icons/io";
 import { IPrompt } from "../../typescript";
 import handleCopy from "../../utils/handleCopy";
 import replaceInstanceAndClass from "../../utils/replaceInstanceAndClass";
 
 interface IPromptList {
-  promptArray: IPrompt[];
   instancePrompt: string;
   classPrompt: string;
+  data : any
 }
 
 const PromptList = ({
   instancePrompt,
   classPrompt,
-  promptArray,
+  data
 }: IPromptList) => {
+
+
+  const [promptArray, setPromptArray] = useState<IPrompt[]>([]);
+
+  useEffect(() => {
+    setPromptArray(data);
+  }, [data]);
+
+
   return (
     <div className=" promptListWrapper justify-center text-slate-500">
       <ul className="space-y-5">
@@ -53,3 +62,5 @@ const PromptList = ({
 };
 
 export default PromptList;
+
+
