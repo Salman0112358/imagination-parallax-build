@@ -131,7 +131,7 @@ body {
 
   .promptListWrapper {
     @apply flex
-      flex-col;
+      flex-col
   }
 
   .outlineBox {

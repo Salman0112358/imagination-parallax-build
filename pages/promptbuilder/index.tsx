@@ -13,6 +13,8 @@ import { IPrompt } from "../../typescript";
 import handleCopy from "../../utils/handleCopy";
 import replaceInstanceAndClass from "../../utils/replaceInstanceAndClass";
 
+import PromptList from "../../components/PromptList/PromptList";
+
 const PromptBuilder = ({ data }: any) => {
   const [instancePrompt, setInstancePrompt] = useState("");
   const [classPrompt, setClassPrompt] = useState("");
@@ -180,7 +182,10 @@ const PromptBuilder = ({ data }: any) => {
               {previewImageUrl && (
                 <button
                   className="absolute submitPromptButton bg-violet-900 text-slate-100 bottom-0 inset-x-0"
-                  onClick={handlePromptSubmission}
+                  onClick={() => {
+                    handlePromptSubmission();
+                    refreshPromptList();
+                  }}
                 >
                   Submit Prompt
                 </button>
@@ -196,7 +201,7 @@ const PromptBuilder = ({ data }: any) => {
             </div>
           </div>
 
-          <div className="outlineBox">
+          <div className="outlineBox w-[150vh]">
             <div className="flex flex-row">
               <input
                 className="promptInput"
@@ -216,39 +221,11 @@ const PromptBuilder = ({ data }: any) => {
             </div>
           </div>
 
-          <div className="promptListWrapper text-slate-500">
-            <ul className="space-y-5">
-              {promptArray.map((prompt: IPrompt) => (
-                <div
-                  className="outlineBox cursor-pointer border-2 border-violet-300 hover:border-violet-900  flex flex-row"
-                  key={prompt.id}
-                >
-                  <div className=" w-4/5 h-10 text-base text-violet-300">
-                    {replaceInstanceAndClass(
-                      prompt.prompt,
-                      instancePrompt,
-                      classPrompt
-                    )}
-                  </div>
-                  <div className=" relative w-1/5">
-                    <IoMdCopy
-                      fill="white"
-                      className="absolute text-slate-500  inset-y-0 right-0 cursor-pointer"
-                      onClick={() =>
-                        handleCopy(
-                          replaceInstanceAndClass(
-                            prompt.prompt,
-                            instancePrompt,
-                            classPrompt
-                          )
-                        )
-                      }
-                    />
-                  </div>
-                </div>
-              ))}
-            </ul>
-          </div>
+          <PromptList
+            promptArray={promptArray}
+            instancePrompt={instancePrompt}
+            classPrompt={classPrompt}
+          />
         </div>
       </main>
     </>
