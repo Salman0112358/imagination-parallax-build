@@ -56,7 +56,7 @@ const PromptBuilder = ({ data }: any) => {
       new Compressor(inputFile, {
         convertSize: 200,
         convertTypes: "image/png,image/webp",
-        quality: 0.8,
+        quality: 0.6,
 
         // The compression process is asynchronous,
         // which means you have to access the `result` in the `success` hook function.

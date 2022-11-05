@@ -66,6 +66,7 @@ export async function getServerSideProps() {
       ).data.images,
     ]);
 
+
     return { props: { data } };
   } catch (error) {
     console.error(error);
