@@ -1,9 +1,12 @@
 import { User } from "@supabase/auth-helpers-react";
 import Compressor from "compressorjs";
-import getPromptImage from "./getPromptImage";
+import getPromptImagePublicUrl from "./getPromptImagePublicUrl";
 import { supabase } from "./supabaseClient";
 
-const compressInputImageAndUpload = async (imageFile: File, user: User) => {
+const compressInputImageAndUpload = async (imageFile: File, user: User) : Promise<string> => {
+
+  const dynamicFileName = imageFile.name + "-" + new Date()
+
    new Compressor(imageFile, {
     convertSize: 200,
     convertTypes: "image/png,image/webp",
@@ -14,7 +17,6 @@ const compressInputImageAndUpload = async (imageFile: File, user: User) => {
 
       formData.append("file", result, "imageman");
 
-      const dynamicFileName = imageFile.name + "-" + new Date()
 
       const { data, error } = await supabase.storage
         .from("user-images")
@@ -29,15 +31,13 @@ const compressInputImageAndUpload = async (imageFile: File, user: User) => {
 
       console.log("Compression & upload success");
 
-      console.log("The uploaded image public url is " ,getPromptImage(dynamicFileName, user))
-
     },
     error(err) {
       console.log(err.message);
     },
   });
 
- 
+  return getPromptImagePublicUrl(dynamicFileName,user);
 
 };
 

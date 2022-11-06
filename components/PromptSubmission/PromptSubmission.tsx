@@ -16,31 +16,30 @@ const PromptSubmission = () => {
   const router = useRouter();
 
   const handlePromptSubmission = async () => {
-    if (!promptIdea || !uploadFile) {
-      window.alert("You Must Have A Prompt With A Preview Image To Submit!");
+    if (!promptIdea || !uploadFile || !user) {
+      window.alert(
+        "You Must Be Logged In, And Have A Prompt With A Preview Image To Submit!"
+      );
     } else {
-      const { data, error } = await supabaseClient.from("prompts").insert([
-        {
-          prompt: promptIdea,
-          render_image: "",
-          user_id: user?.id,
-        },
-      ]);
+      const imagePublicUrl = await compressInputImageAndUpload(
+        uploadFile,
+        user
+      );
 
-      handleImageFileUpload(uploadFile);
-    }
-  };
-
-  const handleImageFileUpload = async (uploadFile: File) => {
-    if (user && uploadFile) {
-      await compressInputImageAndUpload(uploadFile, user);
-
-      // After the image is upload the preview image, current input file and prompt idea are reset
       setPreviewImageUrl("");
       setUploadFile(null);
       setPromptIdea("");
+
+      const { data, error } = await supabaseClient.from("prompts").insert([
+        {
+          prompt: promptIdea,
+          render_image: imagePublicUrl,
+          user_id: user?.id,
+        },
+      ]);
     }
   };
+
 
   const handleImagePreview = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (user && e.target.files) {

@@ -1,7 +1,7 @@
 import { User } from "@supabase/auth-helpers-react";
 import { supabase } from "./supabaseClient";
 
-const getPromptImage = async (fileName: string, user: User) => {
+const getPromptImagePublicUrl = async (fileName: string, user: User) => {
 
   console.log("looking for ", `images/${user.id}/` + fileName)
   const { data } = supabase.storage
@@ -12,4 +12,4 @@ const getPromptImage = async (fileName: string, user: User) => {
     return data.publicUrl;
 };
 
-export default getPromptImage;
+export default getPromptImagePublicUrl;

@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import PromptList from "../../components/PromptList/PromptList";
 import PromptInstanceAndClassInput from "../../components/PromptInstanceAndClassInput/PromptInstanceAndClassInput";
 import PromptSubmission from "../../components/PromptSubmission/PromptSubmission";
-import getPromptImageUrls from "../../utils/getPromptImage";
+
 
 const PromptBuilder = ({ data }: any) => {
   const [instancePrompt, setInstancePrompt] = useState("");
