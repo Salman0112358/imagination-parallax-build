@@ -10,7 +10,7 @@ const Home = ({ data }: LexicaImageArray) => {
 
   useEffect(() => {
     setGridImageArray(createSFWImageArray(data));
-    console.log("I have been called");
+  
   }, [data]);
 
   return (

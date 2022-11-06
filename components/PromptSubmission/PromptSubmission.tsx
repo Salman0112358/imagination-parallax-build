@@ -10,10 +10,15 @@ const PromptSubmission = () => {
   const [promptIdea, setPromptIdea] = useState("");
   const [previewImageUrl, setPreviewImageUrl] = useState<string>("");
   const [uploadFile, setUploadFile] = useState<File | null>();
+  
 
   const user = useUser();
   const supabaseClient = useSupabaseClient();
   const router = useRouter();
+
+  
+  
+
 
   const handlePromptSubmission = async () => {
     if (!promptIdea || !uploadFile || !user) {
@@ -81,7 +86,9 @@ const PromptSubmission = () => {
             id="upload-render"
             accept="image/png, image/jpeg"
             className="hidden"
-            onChange={handleImagePreview}
+            onChange={(e) => {
+              handleImagePreview(e);
+            }}
           />
 
           <button className="submitPromptButton py-2">Artist Ideas</button>

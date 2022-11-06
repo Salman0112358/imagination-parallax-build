@@ -1,14 +1,19 @@
 import { supabase } from "../../utils/supabaseClient";
 
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 
 import PromptList from "../../components/PromptList/PromptList";
 import PromptInstanceAndClassInput from "../../components/PromptInstanceAndClassInput/PromptInstanceAndClassInput";
 import PromptSubmission from "../../components/PromptSubmission/PromptSubmission";
+import { IPrompt } from "../../typescript";
 
 
-const PromptBuilder = ({ data }: any) => {
+interface IPromptBuilder {
+  data : IPrompt[]
+}
+
+const PromptBuilder = ({ data }: IPromptBuilder ) => {
   const [instancePrompt, setInstancePrompt] = useState("");
   const [classPrompt, setClassPrompt] = useState("");
 
@@ -30,6 +35,7 @@ const PromptBuilder = ({ data }: any) => {
             setClassPrompt={setClassPrompt}
           />
 
+     
           <PromptList
             data={data}
             instancePrompt={instancePrompt}
