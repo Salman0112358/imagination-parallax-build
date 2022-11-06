@@ -60,7 +60,7 @@ const PromptSubmission = () => {
   };
 
   const refreshPromptList = () => {
-    router.replace(router.asPath);
+    router.replace(router.asPath, undefined, { scroll: false });
   };
 
   return (

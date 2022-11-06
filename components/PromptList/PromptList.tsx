@@ -14,11 +14,10 @@ interface IPromptList {
 const PromptList = ({ instancePrompt, classPrompt, data }: IPromptList) => {
   const [promptArray, setPromptArray] = useState<IPrompt[]>([]);
 
-  console.log(data)
 
-
+  
   useEffect(() => {
-    setPromptArray(data.sort(() => Math.random() - 0.5));
+    setPromptArray(data);
   }, [data]);
 
   return (
