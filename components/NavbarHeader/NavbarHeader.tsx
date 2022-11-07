@@ -36,6 +36,10 @@ const NavbarHeader = (): JSX.Element => {
           </li>
           <li className="headerLink">
             {" "}
+            <Link href="/promptbuilder">Remix</Link>
+          </li>
+          <li className="headerLink">
+            {" "}
             <Link href="/promptbuilder">Imagine</Link>
           </li>
           {user ? (
