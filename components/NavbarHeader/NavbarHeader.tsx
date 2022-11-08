@@ -42,6 +42,10 @@ const NavbarHeader = (): JSX.Element => {
             {" "}
             <Link href="/promptbuilder">Imagine</Link>
           </li>
+          <li className="headerLink">
+            {" "}
+            <Link href="/promptbuilder">Community</Link>
+          </li>
           {user ? (
             <>
               <li className="font-semibold">Welcome To The Imaginaton Parallax [{user?.email}]</li>
