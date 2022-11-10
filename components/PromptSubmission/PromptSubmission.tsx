@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { ImCross } from "react-icons/im";
 import LoadingImage from "../../assets/images/Loading-Preview.gif";
 import compressInputImageAndUpload from "../../utils/compressInputImageAndUpload";
+import handleCopy from "../../utils/handleCopy";
 
 const PromptSubmission = () => {
   const [promptIdea, setPromptIdea] = useState("");
@@ -67,7 +68,7 @@ const PromptSubmission = () => {
   };
 
   return (
-    <div className="flex flex-row space-x-10">
+    <div className="flex flex-row space-x-10 h-[50vh]">
       <div className="outlineBox">
         <div className="flex flex-col">
           <div className="flex flex-row">
@@ -79,6 +80,7 @@ const PromptSubmission = () => {
               rows={6}
               value={promptIdea}
               onChange={(event) => setPromptIdea(event.target.value)}
+              id="prompt-idea"
             />
           </div>
         </div>
@@ -97,6 +99,7 @@ const PromptSubmission = () => {
           <button
             className="submitPromptButton py-2"
             title="Highlight the part of your prompt you want to replace with the instance and class placeholders"
+            onClick={() => handleCopy("{INSTANCE_PROMPT} {CLASS_PROMPT}")}
           >
             Add Instance And Class
           </button>
@@ -120,7 +123,14 @@ const PromptSubmission = () => {
           )}
         </div>
       </div>
-      <div className="relative outlineBox text-violet-300">
+      <div className="  w-full h-full relative outlineBox text-violet-300">
+        <Image
+          src={previewImageUrl ? previewImageUrl : LoadingImage}
+          width={412}
+          height={412}
+          alt="preview"
+          className=" preview-image relative object-cover max-h-[412px] "
+        />
         {previewImageUrl && (
           <ImCross
             className="absolute right-10 cursor-pointer top-[3vh]"
@@ -138,14 +148,6 @@ const PromptSubmission = () => {
             Submit Prompt
           </button>
         )}
-
-        <Image
-          src={previewImageUrl ? previewImageUrl : LoadingImage}
-          alt="render preview"
-          width={512}
-          height={512}
-          className="rounded-lg"
-        />
       </div>
     </div>
   );

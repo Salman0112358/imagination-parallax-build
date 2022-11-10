@@ -16,7 +16,6 @@ interface IPromptBuilder {
 const PromptBuilder = ({ data }: IPromptBuilder) => {
   const [instancePrompt, setInstancePrompt] = useState("");
   const [classPrompt, setClassPrompt] = useState("");
-  const [sortOrder, setSortOrder] = useState<"random" | "new">("new");
   const [sortedData, setSortedData] = useState<IPrompt[]>(data);
 
   const handleSortOrder = (sort: string) => {

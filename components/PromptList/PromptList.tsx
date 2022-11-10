@@ -11,11 +11,13 @@ interface IPromptList {
   data: IPrompt[];
 }
 
-const PromptList = ({ instancePrompt, classPrompt, data }: IPromptList) => {
+const RemixedPromptGrid = ({
+  instancePrompt,
+  classPrompt,
+  data,
+}: IPromptList) => {
   const [promptArray, setPromptArray] = useState<IPrompt[]>([]);
 
-
-  
   useEffect(() => {
     setPromptArray(data);
   }, [data]);
@@ -23,10 +25,16 @@ const PromptList = ({ instancePrompt, classPrompt, data }: IPromptList) => {
   return (
     <div className="grid grid-cols-4 gap-10 place-items-center">
       {promptArray.map((prompt: IPrompt) => (
-        <PromptListCard prompt={prompt} instancePrompt={instancePrompt} classPrompt={classPrompt} key={prompt.id} />
+        <div className="group" key={prompt.id}>
+          <PromptListCard
+            prompt={prompt}
+            instancePrompt={instancePrompt}
+            classPrompt={classPrompt}
+          />
+        </div>
       ))}
     </div>
   );
 };
 
-export default PromptList;
+export default RemixedPromptGrid;

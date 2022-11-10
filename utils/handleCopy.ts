@@ -1,6 +1,5 @@
-const handleCopy = (promptText: string) => {
-    navigator.clipboard.writeText(promptText);
-  };
+const handleCopy = (copyText: string) => {
+  navigator.clipboard.writeText(copyText);
+};
 
-
-  export default handleCopy;
+export default handleCopy;

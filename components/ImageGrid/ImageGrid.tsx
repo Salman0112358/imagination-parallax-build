@@ -1,7 +1,6 @@
 import { LexicaImageArray } from "../../typescript";
 import HeadlessModal from "../HeadlessModal/HeadlessModal";
 
-
 const ImageGrid = ({ data }: LexicaImageArray): JSX.Element => {
   return (
     <div className="photo-grid">

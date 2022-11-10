@@ -35,8 +35,13 @@ export interface singleImage {
   guidance: number;
   promptid: string;
   nsfw: boolean;
+  
   }
 
+}
+
+export interface sourceImage {
+  image : string
 }
 
 export interface IPrompt {
