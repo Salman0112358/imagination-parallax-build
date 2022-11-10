@@ -69,6 +69,7 @@ export async function getServerSideProps() {
 
     return { props: { data } };
   } catch (error) {
+    console.log("things went bad")
     console.error(error);
     console.log("No Images Retrieved")
   }

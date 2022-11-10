@@ -2,7 +2,6 @@ import React from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import Image from "next/image";
 
 const NavbarHeader = (): JSX.Element => {
   const supabaseClient = useSupabaseClient();
@@ -14,18 +13,13 @@ const NavbarHeader = (): JSX.Element => {
     router.push("/"); //sending the gang back to the root page
   };
 
+  const handleEditUser = () => {
+    router.push("/myprofile");
+  };
+
   return (
     <header className="fixed bg-[#3f056e] bg-opacity-80 font-light text-slate-50">
       <div className="flex items-center space-x-2 md:space-x-10">
-        <Link href="/">
-          <Image
-            src="https://cdn-icons-png.flaticon.com/512/1045/1045191.png"
-            width={45}
-            height={50}
-            className={"cursor-pointer object-contain m-2"}
-            alt="whale icon"
-          />
-        </Link>
         <ul className="flex space-x-4">
           <li className="headerLink">
             <Link href="/">Home</Link>
@@ -50,6 +44,9 @@ const NavbarHeader = (): JSX.Element => {
               </li>
               <li>
                 <button onClick={() => signOutUser()}>Sign Out</button>
+              </li>
+              <li>
+                <button onClick={() => handleEditUser()}>Edit Profile</button>
               </li>
             </>
           ) : (

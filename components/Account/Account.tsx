@@ -1,4 +1,3 @@
-import "./Account.module.css";
 import { useState, useEffect } from "react";
 import {
   useUser,
@@ -72,7 +71,7 @@ export default function Account({ session }: { session: Session }) {
   }
 
   return (
-    <div className="form-widget">
+    <div className="form-widget space-y-5">
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />

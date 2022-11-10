@@ -1,26 +1,21 @@
 import React from "react";
 import type { NextPage } from "next";
-import {
-  useSupabaseClient,
-  useSession,
-} from "@supabase/auth-helpers-react";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
-import Account from "../../components/Account/Account";
 
 const Login: NextPage = () => {
-  
   const supabaseClient = useSupabaseClient();
-  const session = useSession();
+  const user = useUser();
   const router = useRouter();
 
-  // if (user) {
-  //   router.push("/login/account");
-  // }
+  if (user) {
+    router.push("/");
+  }
 
   return (
     <div className=" flex justify-center items-center h-screen w-screen">
-      {!session ? (
+      {!user && (
         <div className=" w-1/4">
           <Auth
             supabaseClient={supabaseClient}
@@ -29,8 +24,6 @@ const Login: NextPage = () => {
             providers={["discord"]}
           />
         </div>
-      ) : (
-        <Account session={session}/>
       )}
     </div>
   );
