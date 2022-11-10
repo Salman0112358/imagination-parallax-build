@@ -38,17 +38,16 @@ const NavbarHeader = (): JSX.Element => {
             {" "}
             <Link href="/promptbuilder">Remix</Link>
           </li>
-          <li className="headerLink">
-            {" "}
-            <Link href="/promptbuilder">Imagine</Link>
-          </li>
+
           <li className="headerLink">
             {" "}
             <Link href="/promptbuilder">Community</Link>
           </li>
           {user ? (
             <>
-              <li className="font-semibold">Welcome To The Imaginaton Parallax [{user?.email}]</li>
+              <li className="font-semibold">
+                Welcome To The Imaginaton Parallax [{user?.email}]
+              </li>
               <li>
                 <button onClick={() => signOutUser()}>Sign Out</button>
               </li>

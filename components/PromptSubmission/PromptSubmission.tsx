@@ -10,20 +10,24 @@ const PromptSubmission = () => {
   const [promptIdea, setPromptIdea] = useState("");
   const [previewImageUrl, setPreviewImageUrl] = useState<string>("");
   const [uploadFile, setUploadFile] = useState<File | null>();
-  
 
   const user = useUser();
   const supabaseClient = useSupabaseClient();
   const router = useRouter();
 
-  
-  
-
-
   const handlePromptSubmission = async () => {
     if (!promptIdea || !uploadFile || !user) {
-      window.alert(
+      return window.alert(
         "You Must Be Logged In, And Have A Prompt With A Preview Image To Submit!"
+      );
+    }
+
+    if (
+      !promptIdea.includes("{INSTANCE_PROMPT}") &&
+      !promptIdea.includes("{CLASS PROMPT}")
+    ) {
+      return window.alert(
+        "Your Prompt must include placeholders for the INSTANCE and CLASS"
       );
     } else {
       const imagePublicUrl = await compressInputImageAndUpload(
@@ -44,7 +48,6 @@ const PromptSubmission = () => {
       ]);
     }
   };
-
 
   const handleImagePreview = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (user && e.target.files) {
@@ -91,8 +94,13 @@ const PromptSubmission = () => {
             }}
           />
 
-          <button className="submitPromptButton py-2">Artist Ideas</button>
-          <button className="submitPromptButton py-2">Composition</button>
+          <button
+            className="submitPromptButton py-2"
+            title="Highlight the part of your prompt you want to replace with the instance and class placeholders"
+          >
+            Add Instance And Class
+          </button>
+
           <button
             className="submitPromptButton"
             onClick={() => document.getElementById("upload-render")?.click()}
