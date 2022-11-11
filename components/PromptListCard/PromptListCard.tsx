@@ -25,10 +25,10 @@ const PromptListCard = ({
     >
       <div className="relative">
         <button
-          className="m-1 rounded-md absolute top-0 w-full hidden group-hover:block font-semibold text-white bg-violet-500/50"
+          className="absolute right-0 w-1/4 hidden group-hover:block font-light m-1"
           onClick={() => handleCopy(prompt.prompt)}
         >
-          Copy Prompt
+          Copy
         </button>
         <img
           className="w-full h-full"
@@ -45,13 +45,7 @@ const PromptListCard = ({
       </div>
       <div className="px-4 font-light">
         <span className="cursor-pointer inline-block bg-black rounded-full px-3 py-1 text-sm  text-white mr-2 mb-2">
-          Guidance
-        </span>
-        <span className="cursor-pointer inline-block bg-black rounded-full px-3 py-1 text-sm  text-white mr-2 mb-2">
-          Dimensions
-        </span>
-        <span className="cursor-pointer inline-block bg-black rounded-full px-3 py-1 text-sm  text-white mr-2 mb-2">
-          Seed
+          Posted by : {prompt.username}
         </span>
       </div>
     </div>

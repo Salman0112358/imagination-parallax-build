@@ -44,19 +44,9 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
             setClassPrompt={setClassPrompt}
           />
 
-          <div className="outlineBox w-[150vh]">
-            <button
-              className="submitPromptButton h-[3vh] text-black bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500"
-              onClick={() => handleSortOrder("random")}
-            >
-              Random
-            </button>
-            <button
-              className="submitPromptButton h-[3vh] text-black bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500"
-              onClick={() => handleSortOrder("new")}
-            >
-              Newest
-            </button>
+          <div className="outlineBox w-[150vh] space-x-5">
+            <button onClick={() => handleSortOrder("random")}>Random</button>
+            <button onClick={() => handleSortOrder("new")}>Newest</button>
           </div>
           <PromptList
             data={sortedData}
@@ -73,7 +63,7 @@ export default PromptBuilder;
 
 export async function getServerSideProps() {
   const { data, error } = await supabase
-    .from("prompts")
+    .from("remix_prompts")
     .select("*")
     .order("inserted_at", { ascending: false });
   return { props: { data } };

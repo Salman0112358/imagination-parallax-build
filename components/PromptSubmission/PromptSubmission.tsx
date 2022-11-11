@@ -40,11 +40,20 @@ const PromptSubmission = () => {
       setUploadFile(null);
       setPromptIdea("");
 
-      const { data, error } = await supabaseClient.from("prompts").insert([
+      let username = (
+        await supabaseClient
+          .from("profiles")
+          .select(`username`)
+          .eq("id", user.id)
+          .single()
+      ).data?.username;
+
+      const { data, error } = await supabaseClient.from("remix_prompts").insert([
         {
           prompt: promptIdea,
           render_image: imagePublicUrl,
           user_id: user?.id,
+          username,
         },
       ]);
     }

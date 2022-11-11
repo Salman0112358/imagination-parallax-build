@@ -10,7 +10,6 @@ const Home = ({ data }: LexicaImageArray) => {
 
   useEffect(() => {
     setGridImageArray(createSFWImageArray(data));
-  
   }, [data]);
 
   return (
@@ -66,11 +65,9 @@ export async function getServerSideProps() {
       ).data.images,
     ]);
 
-
     return { props: { data } };
   } catch (error) {
-    console.log("things went bad")
     console.error(error);
-    console.log("No Images Retrieved")
+    console.log("No Images Retrieved");
   }
 }

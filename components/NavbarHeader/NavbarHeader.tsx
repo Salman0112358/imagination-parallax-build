@@ -18,7 +18,7 @@ const NavbarHeader = (): JSX.Element => {
   };
 
   return (
-    <header className="fixed bg-[#3f056e] bg-opacity-80 font-light text-slate-50">
+    <header className="fixed bg-[#3f056e] bg-opacity-80 font-light text-slate-50 py-2 item px-2">
       <div className="flex items-center space-x-2 md:space-x-10">
         <ul className="flex space-x-4">
           <li className="headerLink">
@@ -30,12 +30,12 @@ const NavbarHeader = (): JSX.Element => {
           </li>
           <li className="headerLink">
             {" "}
-            <Link href="/promptbuilder">Remix</Link>
+            <Link href="/remix">Remix</Link>
           </li>
 
           <li className="headerLink">
             {" "}
-            <Link href="/promptbuilder">Community</Link>
+            <Link href="/community">Community</Link>
           </li>
           {user ? (
             <>

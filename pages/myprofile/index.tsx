@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+
 import type { NextPage } from "next";
-import {
-  useSupabaseClient,
-  useSession,
-  useUser,
-} from "@supabase/auth-helpers-react";
-import { useRouter } from "next/router";
+import { useSession, useUser } from "@supabase/auth-helpers-react";
 
 import Account from "../../components/Account/Account";
 

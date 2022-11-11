@@ -18,36 +18,33 @@ export interface LexicaImageArray {
   data: LexicaImage[];
 }
 
-
 export interface singleImage {
-
-  image : {
+  image: {
     id: string;
-  gallery: string;
-  src: string;
-  srcSmall: string;
-  prompt: string;
-  width: number;
-  height: number;
-  seed: string;
-  grid: boolean;
-  model: string;
-  guidance: number;
-  promptid: string;
-  nsfw: boolean;
-  
-  }
-
+    gallery: string;
+    src: string;
+    srcSmall: string;
+    prompt: string;
+    width: number;
+    height: number;
+    seed: string;
+    grid: boolean;
+    model: string;
+    guidance: number;
+    promptid: string;
+    nsfw: boolean;
+  };
 }
 
 export interface sourceImage {
-  image : string
+  image: string;
 }
 
 export interface IPrompt {
-  id : number;
-  inserted_at : string;
-  prompt : string;
-  render_image : string;
-  user_id : string;
+  id: number;
+  user_id: string;
+  prompt: string;
+  render_image: string;
+  username: string;
+  inserted_at: string;
 }
