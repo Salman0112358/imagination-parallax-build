@@ -20,7 +20,7 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
 
   useEffect(() => {
     handleSortOrder("new");
-  }, [data]);
+  }, []);
 
   const handleSortOrder = (sort: string) => {
     if (sort === "random") {
