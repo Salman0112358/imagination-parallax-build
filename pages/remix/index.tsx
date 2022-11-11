@@ -1,7 +1,7 @@
 import { supabase } from "../../utils/supabaseClient";
 
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import PromptList from "../../components/PromptList/PromptList";
 import PromptInstanceAndClassInput from "../../components/PromptInstanceAndClassInput/PromptInstanceAndClassInput";
@@ -16,7 +16,11 @@ interface IPromptBuilder {
 const PromptBuilder = ({ data }: IPromptBuilder) => {
   const [instancePrompt, setInstancePrompt] = useState("");
   const [classPrompt, setClassPrompt] = useState("");
-  const [sortedData, setSortedData] = useState<IPrompt[]>(data);
+  const [sortedData, setSortedData] = useState<IPrompt[]>([]);
+
+  useEffect(() => {
+    handleSortOrder("new");
+  }, [data]);
 
   const handleSortOrder = (sort: string) => {
     if (sort === "random") {
