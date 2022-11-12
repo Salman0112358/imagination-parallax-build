@@ -59,7 +59,16 @@ export default function Account({ session }: { session: Session }) {
         updated_at: new Date().toISOString(),
       };
 
+      const { data } = await supabase
+        .from("remix_prompts")
+        .update({ username: updates.username })
+        .eq("user_id", user?.id)
+        .select();
+
+      console.log(data);
+
       let { error } = await supabase.from("profiles").upsert(updates);
+
       if (error) throw error;
       alert("Profile updated!");
     } catch (error) {
