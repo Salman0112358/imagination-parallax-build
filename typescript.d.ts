@@ -48,3 +48,12 @@ export interface IPrompt {
   username: string;
   inserted_at: string;
 }
+export interface IUserProfile {
+  id: string,
+  updated_at: string,
+  username: string,
+  full_name: string,
+  avatar_url: string,
+  website: string
+  submissions : number
+}
