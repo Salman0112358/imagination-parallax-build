@@ -1,4 +1,4 @@
-function addContentAtCursorFunc(input: string, newContent: string) {
+function addContentAtCursorFunc(input, newContent) {
   const elem = document.getElementById(input);
 
   if (elem) {
