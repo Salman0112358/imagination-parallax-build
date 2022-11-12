@@ -113,9 +113,16 @@ const PromptSubmission = () => {
           <button
             className="submitPromptButton py-2"
             title="Highlight the part of your prompt you want to replace with the instance and class placeholders"
-            onClick={() =>
-              addTextAtCursor("prompt-idea", "{INSTANCE_PROMPT} {CLASS_PROMPT}")
-            }
+            onClick={() => {
+              addTextAtCursor(
+                "prompt-idea",
+                "{INSTANCE_PROMPT} {CLASS_PROMPT}"
+              );
+              setPromptIdea(
+                (document.getElementById("prompt-idea") as HTMLTextAreaElement)
+                  .value
+              );
+            }}
           >
             Add Instance And Class
           </button>
