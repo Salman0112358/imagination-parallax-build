@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { ImCross } from "react-icons/im";
 import LoadingImage from "../../assets/images/Loading-Preview.gif";
 import compressInputImageAndUpload from "../../utils/compressInputImageAndUpload";
-import handleCopy from "../../utils/handleCopy";
+
 import addTextAtCursor from "../../utils/addTextAtCursor";
 
 const PromptSubmission = () => {
