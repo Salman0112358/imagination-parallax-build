@@ -6,11 +6,14 @@ import { ImCross } from "react-icons/im";
 import LoadingImage from "../../assets/images/Loading-Preview.gif";
 import compressInputImageAndUpload from "../../utils/compressInputImageAndUpload";
 import handleCopy from "../../utils/handleCopy";
+import addTextAtCursor from "../../utils/addTextAtCursor";
 
 const PromptSubmission = () => {
   const [promptIdea, setPromptIdea] = useState("");
   const [previewImageUrl, setPreviewImageUrl] = useState<string>("");
   const [uploadFile, setUploadFile] = useState<File | null>();
+
+  console.log(uploadFile?.text, uploadFile?.name);
 
   const user = useUser();
   const supabaseClient = useSupabaseClient();
@@ -48,14 +51,16 @@ const PromptSubmission = () => {
           .single()
       ).data?.username;
 
-      const { data, error } = await supabaseClient.from("remix_prompts").insert([
-        {
-          prompt: promptIdea,
-          render_image: imagePublicUrl,
-          user_id: user?.id,
-          username,
-        },
-      ]);
+      const { data, error } = await supabaseClient
+        .from("remix_prompts")
+        .insert([
+          {
+            prompt: promptIdea,
+            render_image: imagePublicUrl,
+            user_id: user?.id,
+            username,
+          },
+        ]);
     }
   };
 
@@ -77,8 +82,8 @@ const PromptSubmission = () => {
   };
 
   return (
-    <div className="flex flex-row space-x-10 h-[50vh]">
-      <div className="outlineBox">
+    <div className="flex flex-row space-x-10">
+      <div className="outlineBox h-[25vh]">
         <div className="flex flex-col">
           <div className="flex flex-row">
             <textarea
@@ -108,7 +113,9 @@ const PromptSubmission = () => {
           <button
             className="submitPromptButton py-2"
             title="Highlight the part of your prompt you want to replace with the instance and class placeholders"
-            onClick={() => handleCopy("{INSTANCE_PROMPT} {CLASS_PROMPT}")}
+            onClick={() =>
+              addTextAtCursor("prompt-idea", "{INSTANCE_PROMPT} {CLASS_PROMPT}")
+            }
           >
             Add Instance And Class
           </button>
@@ -119,6 +126,7 @@ const PromptSubmission = () => {
           >
             Preview Render
           </button>
+
           {!previewImageUrl && (
             <button
               className="submitPromptButton"
@@ -130,15 +138,26 @@ const PromptSubmission = () => {
               Submit Prompt
             </button>
           )}
+          {promptIdea && (
+            <button
+              className="submitPromptButton"
+              onClick={() => {
+                setPromptIdea("");
+                setPreviewImageUrl("");
+              }}
+            >
+              Clear All
+            </button>
+          )}
         </div>
       </div>
-      <div className="  w-full h-full relative outlineBox text-violet-300">
+      <div className="  w-full relative outlineBox text-violet-300 h-[80vh]">
         <Image
           src={previewImageUrl ? previewImageUrl : LoadingImage}
-          width={412}
-          height={412}
+          width={512}
+          height={512}
           alt="preview"
-          className=" preview-image relative object-cover max-h-[412px] "
+          className=" preview-image relative object-cover max-h- "
         />
         {previewImageUrl && (
           <ImCross

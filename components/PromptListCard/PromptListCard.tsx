@@ -26,7 +26,15 @@ const PromptListCard = ({
       <div className="relative">
         <button
           className="absolute right-0 w-1/4 hidden group-hover:block font-light m-1"
-          onClick={() => handleCopy(prompt.prompt)}
+          onClick={() =>
+            handleCopy(
+              replaceInstanceAndClass(
+                prompt.prompt,
+                instancePrompt,
+                classPrompt
+              )
+            )
+          }
         >
           Copy
         </button>

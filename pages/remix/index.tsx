@@ -8,6 +8,7 @@ import PromptInstanceAndClassInput from "../../components/PromptInstanceAndClass
 import PromptSubmission from "../../components/PromptSubmission/PromptSubmission";
 import { IPrompt } from "../../typescript";
 import router from "next/router";
+import { GenericModal } from "../../components/GenericModal/GenericModal";
 
 interface IPromptBuilder {
   data: IPrompt[];
@@ -39,14 +40,19 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
       </Head>
       <main>
         <div className=" absolute inset-x-0 top-20 flex flex-col justify-center items-center space-y-5">
-          <PromptSubmission />
-
-          <PromptInstanceAndClassInput
-            instancePrompt={instancePrompt}
-            classPrompt={classPrompt}
-            setInstancePrompt={setInstancePrompt}
-            setClassPrompt={setClassPrompt}
-          />
+          <div className="w-full flex items-center justify-center align-middle">
+            <GenericModal modalText="Remix Prompt ">
+              <PromptSubmission />
+            </GenericModal>
+          </div>
+          <div className="flex flex-row">
+            <PromptInstanceAndClassInput
+              instancePrompt={instancePrompt}
+              classPrompt={classPrompt}
+              setInstancePrompt={setInstancePrompt}
+              setClassPrompt={setClassPrompt}
+            />
+          </div>
 
           <div className="outlineBox w-[150vh] space-x-5">
             <button onClick={() => handleSortOrder("random")}>Random</button>
