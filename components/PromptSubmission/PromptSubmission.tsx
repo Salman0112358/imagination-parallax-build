@@ -63,6 +63,8 @@ const PromptSubmission = () => {
         ]);
     }
 
+   
+
 
 
   };
@@ -90,7 +92,7 @@ const PromptSubmission = () => {
         <div className="flex flex-col">
           <div className="flex flex-row">
             <textarea
-              className="promptTextArea w-[70vh]"
+              className="promptTextArea w-[30vw]"
               name="prompt"
               maxLength={168}
               placeholder="Enter your prompt ideas here"

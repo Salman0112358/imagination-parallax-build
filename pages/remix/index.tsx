@@ -54,7 +54,7 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
             />
           </div>
 
-          <div className="outlineBox w-[150vh] space-x-5">
+          <div className="outlineBox w-[70vw] space-x-5">
             <button onClick={() => handleSortOrder("random")}>Random</button>
             <button onClick={() => handleSortOrder("new")}>Newest</button>
           </div>

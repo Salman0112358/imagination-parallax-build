@@ -19,7 +19,7 @@ const PromptInstanceAndClassInput = ({
   };
 
   return (
-    <div className="outlineBox w-[150vh]">
+    <div className="outlineBox w-[70vw]">
       <div className="flex flex-row items-center">
         <input
           className="promptInput"

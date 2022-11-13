@@ -58,7 +58,7 @@ export default function HeadlessModal({ image }: singleImage) {
                 >
                   <Dialog.Panel
                     className={` ${
-                      image.width > image.height ? "w-[90vh]" : "w-[50vh]"
+                      image.width > image.height ? "w-[45vw]" : "w-[25vw]"
                     } transform overflow-hidden rounded-2xl bg-black text-slate-100 p-6 text-left align-middle shadow-xl transition-all`}
                   >
                     <div className="flex flex-col">
