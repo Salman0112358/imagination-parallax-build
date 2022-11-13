@@ -94,7 +94,7 @@ const PromptSubmission = () => {
             <textarea
               className="promptTextArea w-[30vw]"
               name="prompt"
-              maxLength={168}
+              maxLength={1000}
               placeholder="Enter your prompt ideas here"
               rows={6}
               value={promptIdea}
