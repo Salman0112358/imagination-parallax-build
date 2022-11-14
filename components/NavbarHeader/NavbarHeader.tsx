@@ -26,7 +26,7 @@ const NavbarHeader = (): JSX.Element => {
           </li>
           <li className="headerLink">
             {" "}
-            <Link href="/myCollection">My Collection</Link>
+            <Link href="/imagine">Imagine</Link>
           </li>
           <li className="headerLink">
             {" "}
