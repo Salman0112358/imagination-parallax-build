@@ -13,8 +13,6 @@ const PromptSubmission = () => {
   const [previewImageUrl, setPreviewImageUrl] = useState<string>("");
   const [uploadFile, setUploadFile] = useState<File | null>();
 
-  console.log(uploadFile?.text, uploadFile?.name);
-
   const user = useUser();
   const supabaseClient = useSupabaseClient();
   const router = useRouter();
@@ -61,9 +59,18 @@ const PromptSubmission = () => {
             username,
           },
         ]);
+
+      const currentPost = await supabaseClient.from("profiles").select("submissions").eq('id', user.id)
+
+      if (currentPost.data) {
+
+        await supabaseClient.from("profiles").update({ "submissions": Number(`${currentPost.data[0].submissions}` + 1) }).eq('id', user.id).select()
+
+      }
+
     }
 
-   
+
 
 
 

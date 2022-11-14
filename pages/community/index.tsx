@@ -14,7 +14,7 @@ const index = ({ data, userList }: any) => {
           <UsersList userList={userList} />
         </div>
         <div className="w-1/2">
-          <ImageRingSlider data={data} />
+          {/* <ImageRingSlider data={data} /> */}
         </div>
 
       </div>
