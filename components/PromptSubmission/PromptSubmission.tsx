@@ -64,7 +64,7 @@ const PromptSubmission = () => {
 
       if (currentPost.data) {
 
-        await supabaseClient.from("profiles").update({ "submissions": Number(`${currentPost.data[0].submissions}` + 1) }).eq('id', user.id).select()
+        await supabaseClient.from("profiles").update({ "submissions": Number(currentPost.data[0].submissions + 1) }).eq('id', user.id).select()
 
       }
 
