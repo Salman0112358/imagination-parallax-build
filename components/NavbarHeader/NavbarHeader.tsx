@@ -24,10 +24,10 @@ const NavbarHeader = (): JSX.Element => {
           <li className="headerLink">
             <Link href="/">Home</Link>
           </li>
-          <li className="headerLink">
+          {/* <li className="headerLink">
             {" "}
             <Link href="/imagine">Imagine</Link>
-          </li>
+          </li> */}
           <li className="headerLink">
             {" "}
             <Link href="/remix">Remix</Link>
