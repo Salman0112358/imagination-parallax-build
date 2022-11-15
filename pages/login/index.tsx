@@ -10,7 +10,7 @@ const Login: NextPage = () => {
   const router = useRouter();
 
   if (user) {
-    router.push("/");
+    router.push("/myprofile");
   }
 
   return (
