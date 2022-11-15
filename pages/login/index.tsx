@@ -21,7 +21,7 @@ const Login: NextPage = () => {
             supabaseClient={supabaseClient}
             appearance={{ theme: ThemeSupa }}
             theme="dark"
-            providers={["discord"]}
+            providers={["discord", "github"]}
           />
         </div>
       )}
