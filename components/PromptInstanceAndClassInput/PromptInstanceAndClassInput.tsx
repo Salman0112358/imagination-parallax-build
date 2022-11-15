@@ -12,7 +12,7 @@ const PromptInstanceAndClassInput = ({
   setInstancePrompt,
   classPrompt,
   setClassPrompt,
-} : IPromptInstanceAndClassInput) => {
+}: IPromptInstanceAndClassInput) => {
   const handleClear = () => {
     setInstancePrompt("");
     setClassPrompt("");

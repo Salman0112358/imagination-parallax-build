@@ -1,30 +1,30 @@
-import React from "react";
-import ImageRingSlider from "../../components/ImageRingSlider/ImageRingSlider";
+import React, { useState } from "react";
+import MostLikedPost from "../../components/MostLikedPost/MostLikedPost";
+import PromptKeywordCounter from "../../components/PromptKeywordCounter/PromptKeywordCounter";
 import UsersList from "../../components/UsersList/UsersList";
+import { IPrompt, IUserProfile } from "../../typescript";
 import { supabase } from "../../utils/supabaseClient";
 
-const index = ({ data, userList }: any) => {
+interface ICommunityPage {
+  data : IPrompt[],
+  userList : IUserProfile[]
+}
 
-  console.log(userList)
 
+
+const CommunityPage = ({ data, userList }: ICommunityPage) => {
   return (
     <>
-      <div className="flex flex-row mt-[10vh] mx-5">
-        <div className="w-1/2">
-          <UsersList userList={userList} />
-        </div>
-        <div className="w-1/2">
-          {/* <ImageRingSlider data={data} /> */}
-        </div>
-
+      <div className="flex flex-row mt-[10vh] mx-5 w-screen space-x-5">
+        <UsersList userList={userList} />
+        <MostLikedPost data={data} />
+        <PromptKeywordCounter data={data} />
       </div>
-
     </>
-
   );
 };
 
-export default index;
+export default CommunityPage;
 
 export async function getServerSideProps() {
   const { data, error } = await supabase
@@ -32,6 +32,6 @@ export async function getServerSideProps() {
     .select("*")
     .order("inserted_at", { ascending: false });
 
-  const userList = (await supabase.from("profiles").select("*")).data
+  const userList = (await supabase.from("profiles").select("*")).data;
   return { props: { data, userList } };
 }

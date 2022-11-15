@@ -45,15 +45,16 @@ export interface IPrompt {
   user_id: string;
   prompt: string;
   render_image: string;
-  username: string;
   inserted_at: string;
+  username: string;
+  kudos: number;
 }
 export interface IUserProfile {
-  id: string,
-  updated_at: string,
-  username: string,
-  full_name: string,
-  avatar_url: string,
-  website: string
-  submissions : number
+  id: string;
+  updated_at: string;
+  username: string;
+  full_name: string;
+  avatar_url: string;
+  website: string;
+  submissions: number;
 }

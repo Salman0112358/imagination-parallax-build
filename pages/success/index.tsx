@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const index = () => {
-  return (
-    <div>success log in page</div>
-  )
-}
+  return <div>success log in page</div>;
+};
 
-export default index
+export default index;

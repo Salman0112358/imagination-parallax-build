@@ -10,7 +10,12 @@ export const GenericModal = ({ children, modalText }: IGenricModal) => {
 
   return (
     <>
-      <button className="w-[70vw] h-[5vh]" onClick={() => setShowModal((prev) => !prev)}>{modalText}</button>
+      <button
+        className="w-[70vw] h-[5vh]"
+        onClick={() => setShowModal((prev) => !prev)}
+      >
+        {modalText}
+      </button>
       {showModal && (
         <div
           className="relative z-10"
