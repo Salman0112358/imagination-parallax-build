@@ -48,12 +48,16 @@ export default function Account({ session }: { session: Session }) {
   }
 
   interface IupdateProfile {
-    username : string,
-    website : string,
-    avatar_url : string
+    username: string;
+    website: string;
+    avatar_url: string;
   }
 
-  async function updateProfile({ username, website, avatar_url }: IupdateProfile) {
+  async function updateProfile({
+    username,
+    website,
+    avatar_url,
+  }: IupdateProfile) {
     try {
       setLoading(true);
 

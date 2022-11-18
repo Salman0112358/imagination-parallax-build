@@ -2,7 +2,7 @@ import React from "react";
 import { IPrompt } from "../../typescript";
 
 interface IMostLikedPost {
-    data : IPrompt[]
+  data: IPrompt[];
 }
 
 const MostLikedPost = ({ data }: IMostLikedPost) => {

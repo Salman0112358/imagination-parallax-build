@@ -6,11 +6,9 @@ import { IPrompt, IUserProfile } from "../../typescript";
 import { supabase } from "../../utils/supabaseClient";
 
 interface ICommunityPage {
-  data : IPrompt[],
-  userList : IUserProfile[]
+  data: IPrompt[];
+  userList: IUserProfile[];
 }
-
-
 
 const CommunityPage = ({ data, userList }: ICommunityPage) => {
   return (
