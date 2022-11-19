@@ -23,27 +23,27 @@ const NavbarHeader = (): JSX.Element => {
     <header className="fixed bg-[#3f056e] bg-opacity-80 font-light text-xl text-slate-50 py-2 item px-2 hover:bg-[#800337]">
       <div className="flex items-center space-x-2 md:space-x-10">
         <ul className="flex space-x-4">
-          <button>
-            <li className="headerLink">
-              <Link href="/">Home</Link>
-            </li>
-          </button>
+          <li className="headerLink">
+            <Link className="button" href="/">
+              Home
+            </Link>
+          </li>
+
           {/* <li className="headerLink">
             {" "}
             <Link href="/imagine">Imagine</Link>
           </li> */}
           <li className="headerLink">
             {" "}
-            <button>
-              {" "}
-              <Link href="/remix">Remix</Link>
-            </button>
+            <Link className="button" href="/remix">
+              Remix
+            </Link>
           </li>
           <li className="headerLink">
             {" "}
-            <button>
-              <Link href="/community">Community</Link>
-            </button>
+            <Link className="button" href="/community">
+              Community
+            </Link>
           </li>
           {user ? (
             <>
@@ -64,9 +64,9 @@ const NavbarHeader = (): JSX.Element => {
             </>
           ) : (
             <li>
-              <button>
-                <Link href="/login">Login</Link>
-              </button>
+              <Link className="button" href="/login">
+                Login
+              </Link>
             </li>
           )}
         </ul>

@@ -4,6 +4,7 @@ import { LexicaImage, LexicaImageArray } from "../typescript";
 import createSFWImageArray from "../utils/createSFWImageArray";
 import ImageGrid from "../components/ImageGrid/ImageGrid";
 import Head from "next/head";
+import HeadlessModal from "../components/HeadlessModal/HeadlessModal";
 
 const Home = ({ data }: LexicaImageArray) => {
   const [gridImageArray, setGridImageArray] = useState<LexicaImage[]>([]);
@@ -21,7 +22,21 @@ const Home = ({ data }: LexicaImageArray) => {
         </Head>
       </div>
       <main className="relative px-10 pb-24 lg:space-y-24">
-        <ImageGrid data={gridImageArray} />
+        <ImageGrid>
+          {data.map((image: LexicaImage) => (
+            <div
+              className={` group cursor-pointer card ${
+                image.height / image.width > 1 && "card-tall"
+              } ${image.height / image.width < 1 && "card-wide"}   `}
+              key={image.id}
+              style={{ backgroundImage: `url(${image.src})` }}
+            >
+              <HeadlessModal image={image} />
+
+              {}
+            </div>
+          ))}
+        </ImageGrid>
       </main>
     </>
   );

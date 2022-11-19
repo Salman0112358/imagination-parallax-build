@@ -2,7 +2,7 @@ import { supabase } from "../../utils/supabaseClient";
 
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
-import { useUser } from "@supabase/auth-helpers-react"
+import { useUser } from "@supabase/auth-helpers-react";
 import PromptList from "../../components/PromptList/PromptList";
 import PromptInstanceAndClassInput from "../../components/PromptInstanceAndClassInput/PromptInstanceAndClassInput";
 import PromptSubmission from "../../components/PromptSubmission/PromptSubmission";
@@ -11,6 +11,8 @@ import router from "next/router";
 import { GenericModal } from "../../components/GenericModal/GenericModal";
 import ImageCarousel from "../../components/ImageCarousel/ImageCarousel";
 import extractUserRemixSubmissions from "../../utils/extractUserRemixSubmissions";
+import ImageGrid from "../../components/ImageGrid/ImageGrid";
+import RemixImageGrid from "../../components/RemixImageGrid/RemixImageGrid";
 
 interface IPromptBuilder {
   data: IPrompt[];
@@ -21,14 +23,14 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
   const [classPrompt, setClassPrompt] = useState("");
   const [sortedData, setSortedData] = useState<IPrompt[]>([]);
 
-  const [userSubmissions, setUserSubmissions] = useState<IPrompt[]>([])
+  const [userSubmissions, setUserSubmissions] = useState<IPrompt[]>([]);
 
   const user = useUser();
 
   useEffect(() => {
     handleSortOrder("new");
-    user && setUserSubmissions(extractUserRemixSubmissions(data, user?.id))
-  }, []);
+    user && setUserSubmissions(extractUserRemixSubmissions(data, user?.id));
+  }, [user]);
 
   const handleSortOrder = (sort: string) => {
     if (sort === "random") {
@@ -39,7 +41,7 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
     router.replace(router.asPath, undefined, { scroll: false });
   };
 
-  console.log(userSubmissions)
+  console.log(userSubmissions);
 
   return (
     <>
@@ -48,16 +50,23 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="mt-[10vh]">
-        <div className=" float-left w-1/2 h-screen ">
-
-        <ImageCarousel data={userSubmissions} />
+        <div className=" float-left w-1/2 h-[90vh] ">
+          <ImageCarousel data={userSubmissions} />
         </div>
-        <div className=" float-right w-1/2 h-screen ">
+        <div className=" float-right w-1/2 h-[90vh] ">
+          <div className=" px-[20px] h-[90vh] overflow-y-auto ">
 
-        {/* <ImageCarousel data={sortedData} /> */}
+          <RemixImageGrid >
+            {sortedData.map((image) => (
+              <>
+              <img className="card" key={image.id} src={image.render_image} style={{width: "100%", display: "block"}}/>
+              </>
+            ))}
+          </RemixImageGrid>
+          </div>
         </div>
         {/* <div className=" absolute inset-x-0 top-20 flex flex-col justify-center items-center space-y-5"> */}
-          {/* <div className="flex flex-row">
+        {/* <div className="flex flex-row">
             <PromptInstanceAndClassInput
               instancePrompt={instancePrompt}
               classPrompt={classPrompt}
@@ -66,11 +75,11 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
             />
           </div> */}
 
-          {/* <div className="outlineBox w-[70vw] space-x-5">
+        {/* <div className="outlineBox w-[70vw] space-x-5">
             <button onClick={() => handleSortOrder("random")}>Random</button>
             <button onClick={() => handleSortOrder("new")}>Newest</button>
           </div> */}
-          {/* <PromptList
+        {/* <PromptList
             data={sortedData}
             instancePrompt={instancePrompt}
             classPrompt={classPrompt}
