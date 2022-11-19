@@ -4,7 +4,7 @@ import { LexicaImage, LexicaImageArray } from "../typescript";
 import createSFWImageArray from "../utils/createSFWImageArray";
 import ImageGrid from "../components/ImageGrid/ImageGrid";
 import Head from "next/head";
-import HeadlessModal from "../components/HeadlessModal/HeadlessModal";
+import HeadlessModal from "../components/HomeModal/HomeModal";
 
 const Home = ({ data }: LexicaImageArray) => {
   const [gridImageArray, setGridImageArray] = useState<LexicaImage[]>([]);
@@ -53,6 +53,9 @@ export async function getServerSideProps() {
         await axios.get(`https://lexica.art/api/v1/search?q=artstation`)
       ).data.images,
       ...(
+        await axios.get(`https://lexica.art/api/v1/search?q=tiling`)
+      ).data.images,
+      ...(
         await axios.get(`https://lexica.art/api/v1/search?q=fantasy`)
       ).data.images,
       ...(
@@ -75,6 +78,7 @@ export async function getServerSideProps() {
           `https://lexica.art/api/v1/search?q=trending on artstation`
         )
       ).data.images,
+
       ...(
         await axios.get(`https://lexica.art/api/v1/search?q=wallpaper`)
       ).data.images,

@@ -1,11 +1,13 @@
 import React from "react";
-import Masonry from "react-responsive-masonry";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 const RemixImageGrid = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Masonry columnsCount={4} gutter="10px">
-      {children}
-    </Masonry>
+    <ResponsiveMasonry
+      columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1200: 4, 1500: 6 }}
+    >
+      <Masonry>{children}</Masonry>
+    </ResponsiveMasonry>
   );
 };
 

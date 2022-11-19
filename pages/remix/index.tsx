@@ -49,42 +49,29 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
         <title>Imagine A Prompt</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="mt-[10vh]">
-        <div className=" float-left w-1/2 h-[90vh] ">
-          <ImageCarousel data={userSubmissions} />
-        </div>
-        <div className=" float-right w-1/2 h-[90vh] ">
-          <div className=" px-[20px] h-[90vh] overflow-y-auto ">
 
-          <RemixImageGrid >
-            {sortedData.map((image) => (
-              <>
-              <img className="card" key={image.id} src={image.render_image} style={{width: "100%", display: "block"}}/>
-              </>
-            ))}
-          </RemixImageGrid>
+      <main className="mt-[10vh]">
+
+        <div className=" max-[720px]:hidden outlineBox w-1/2  mx-[25vw] space-x-2 p-2 my-2 flex justify-center ">
+          <button onClick={() => handleSortOrder("random")}>Random</button>
+          <button onClick={() => handleSortOrder("new")}>Newest</button>
+          <GenericModal modalText="Remix Prompt ">
+            <PromptSubmission />
+          </GenericModal>
+        </div>
+
+        <div className="w-full h-[90vh] ">
+          <div className=" px-[20px] h-[90vh] overflow-y-auto ">
+            <RemixImageGrid >
+              {sortedData.map((image) => (
+                <>
+                  <img className=" p-1 hover:scale-110 hover:translate-y-1 transition ease-in-out  !rounded-3xl" key={image.id} src={image.render_image} style={{ width: "100%", display: "block" }} />
+                </>
+              ))}
+            </RemixImageGrid>
           </div>
         </div>
-        {/* <div className=" absolute inset-x-0 top-20 flex flex-col justify-center items-center space-y-5"> */}
-        {/* <div className="flex flex-row">
-            <PromptInstanceAndClassInput
-              instancePrompt={instancePrompt}
-              classPrompt={classPrompt}
-              setInstancePrompt={setInstancePrompt}
-              setClassPrompt={setClassPrompt}
-            />
-          </div> */}
 
-        {/* <div className="outlineBox w-[70vw] space-x-5">
-            <button onClick={() => handleSortOrder("random")}>Random</button>
-            <button onClick={() => handleSortOrder("new")}>Newest</button>
-          </div> */}
-        {/* <PromptList
-            data={sortedData}
-            instancePrompt={instancePrompt}
-            classPrompt={classPrompt}
-          /> */}
-        {/* </div> */}
       </main>
     </>
   );
@@ -99,3 +86,32 @@ export async function getServerSideProps() {
     .order("inserted_at", { ascending: false });
   return { props: { data } };
 }
+
+
+
+
+
+
+
+
+
+{/* <div className=" float-left w-1/2 h-[90vh] ">
+          <ImageCarousel data={userSubmissions} />
+        </div> */}
+
+
+{/* <div className=" absolute inset-x-0 top-20 flex flex-col justify-center items-center space-y-5"> */ }
+{/* <div className="flex flex-row">
+            <PromptInstanceAndClassInput
+              instancePrompt={instancePrompt}
+              classPrompt={classPrompt}
+              setInstancePrompt={setInstancePrompt}
+              setClassPrompt={setClassPrompt}
+            />
+          </div> */}
+{/* <PromptList
+            data={sortedData}
+            instancePrompt={instancePrompt}
+            classPrompt={classPrompt}
+          /> */}
+{/* </div> */ }

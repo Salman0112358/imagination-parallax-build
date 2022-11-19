@@ -21,7 +21,7 @@ const NavbarHeader = (): JSX.Element => {
 
   return (
     <header className="fixed bg-[#3f056e] bg-opacity-80 font-light text-xl text-slate-50 py-2 item px-2 hover:bg-[#800337]">
-      <div className="flex items-center space-x-2 md:space-x-10">
+      <div className="w-screen flex items-center space-x-2 md:space-x-10 max-[1170px]:justify-center">
         <ul className="flex space-x-4">
           <li className="headerLink">
             <Link className="button" href="/">
@@ -48,18 +48,10 @@ const NavbarHeader = (): JSX.Element => {
           {user ? (
             <>
               <li>
-                <GenericModal modalText="Remix Prompt ">
-                  <PromptSubmission />
-                </GenericModal>
-              </li>
-              <li>
                 <button onClick={() => signOutUser()}>Sign Out</button>
               </li>
               <li>
                 <button onClick={() => handleEditUser()}>Edit Profile</button>
-              </li>
-              <li className="font-semibold">
-                Welcome To The Imaginaton Parallax [{user?.email}]
               </li>
             </>
           ) : (
