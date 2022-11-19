@@ -547,8 +547,9 @@ button.primary,
   }
 }
 
-.carousel {
+.carousel-slider {
   position: absolute;
-  left: 40%;
-  right: 40%;
+  left: 25%;
+  right: 25%;
 }
+
