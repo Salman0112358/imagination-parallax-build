@@ -23,18 +23,18 @@ const NavbarHeader = (): JSX.Element => {
     <header className="fixed bg-[#3f056e] bg-opacity-80 font-light text-xl text-slate-50 py-2 item px-2 hover:bg-[#800337]">
       <div className="w-screen flex items-center space-x-2 md:space-x-10 max-[1170px]:justify-center">
         <ul className="flex space-x-4 items-center">
-          <li className="headerLink">
+          <li className="headerLink hover:scale-90">
             <Link className="button" href="/">
               Explore
             </Link>
           </li>
-          <li className="headerLink">
+          <li className="headerLink hover:scale-90">
             {" "}
             <Link className="button" href="/remix">
               Remix
             </Link>
           </li>
-          <li className="headerLink">
+          <li className="headerLink hover:scale-90">
             {" "}
             <Link className="button" href="/community">
               Community
@@ -42,16 +42,16 @@ const NavbarHeader = (): JSX.Element => {
           </li>
           {user ? (
             <>
-              <li>
+              <li className="headerLink hover:scale-90">
                 <button onClick={() => signOutUser()}>Sign Out</button>
               </li>
-              <li>
+              <li className="headerLink hover:scale-90">
                 <button onClick={() => handleEditUser()}>Edit Profile</button>
               </li>
-              <li>{user.email}</li>
+              <li className="headerLink">{user.email}</li>
             </>
           ) : (
-            <li>
+            <li className="headerLink hover:scale-90">
               <Link className="button" href="/login">
                 Login
               </Link>
