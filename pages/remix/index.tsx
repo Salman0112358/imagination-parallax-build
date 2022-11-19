@@ -56,18 +56,16 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
             <PromptSubmission />
           </GenericModal>
           <GenericModal modalText="Remix">
-          <div className="flex flex-row">
-            <PromptInstanceAndClassInput
-              instancePrompt={instancePrompt}
-              classPrompt={classPrompt}
-              setInstancePrompt={setInstancePrompt}
-              setClassPrompt={setClassPrompt}
-            />
-          </div>
+            <div className="flex flex-row">
+              <PromptInstanceAndClassInput
+                instancePrompt={instancePrompt}
+                classPrompt={classPrompt}
+                setInstancePrompt={setInstancePrompt}
+                setClassPrompt={setClassPrompt}
+              />
+            </div>
           </GenericModal>
         </div>
-
-     
 
         <div className="w-full h-[90vh] ">
           <div className=" px-[20px] h-[90vh] overflow-y-auto ">
