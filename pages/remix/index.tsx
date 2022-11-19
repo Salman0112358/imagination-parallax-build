@@ -49,7 +49,7 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="">
+      <main className="mt-[8vh]">
         <div className=" fixed left-0 top-[30%] m-2 z-[50] max-[720px]:hidden outlineBox  space-y-1 flex flex-col justify-center ">
           <button title="Sort By Random" onClick={() => handleSortOrder("random")}>🎲</button>
           <button title="Sort By Latest" onClick={() => handleSortOrder("new")}>🔥</button>

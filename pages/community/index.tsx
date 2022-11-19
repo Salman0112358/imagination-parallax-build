@@ -13,7 +13,7 @@ interface ICommunityPage {
 const CommunityPage = ({ data, userList }: ICommunityPage) => {
   return (
     <>
-      <div className="flex flex-row mt-[10vh] mx-5 w-screen space-x-5">
+      <div className="flex flex-row mt-[8vh] mx-5 w-screen space-x-5">
         <UsersList userList={userList} />
         <MostLikedPost data={data} />
         <PromptKeywordCounter data={data} />
