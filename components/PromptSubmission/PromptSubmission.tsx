@@ -93,12 +93,11 @@ const PromptSubmission = () => {
   };
 
   return (
-    <div className="flex flex-row space-x-10">
-      <div className="outlineBox h-[25vh]">
-        <div className="flex flex-col">
+    <div className="flex flex-row h-[80vh] max-[1000px]:flex-col">
+      <div className="outlineBox">
           <div className="flex flex-row">
             <textarea
-              className="promptTextArea w-[30vw]"
+              className="promptTextArea w-full max-[1000px]:h-[10vh]"
               name="prompt"
               maxLength={1000}
               placeholder="Enter your prompt ideas here"
@@ -108,7 +107,6 @@ const PromptSubmission = () => {
               id="prompt-idea"
             />
           </div>
-        </div>
         <div className="flex flex-row mt-2 justify-center">
           <input
             type="file"
@@ -169,13 +167,13 @@ const PromptSubmission = () => {
           )}
         </div>
       </div>
-      <div className="  w-full relative outlineBox text-violet-300 h-[80vh]">
+      <div className=" flex justify-center relative outlineBox text-violet-300 min-[1000px]:mx-2 max-[1000px]:h-[50vh] max-[1000px]:mt-[10px]  ">
         <Image
           src={previewImageUrl ? previewImageUrl : LoadingImage}
           width={512}
           height={512}
           alt="preview"
-          className=" preview-image relative object-cover max-h- "
+          className=" preview-image relative object-cover h-full w-full"
         />
         {previewImageUrl && (
           <ImCross

@@ -25,7 +25,7 @@ export const GenericModal = ({ children, modalText }: IGenricModal) => {
                 <div className="bg-black px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="relative sm:flex sm:items-start">
                     <button
-                      className="absolute bottom-0"
+                      className="absolute bottom-0 max-[1000px]:w-full"
                       onClick={() => setShowModal((prev) => !prev)}
                     >
                       Exit
