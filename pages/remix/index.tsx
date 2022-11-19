@@ -54,6 +54,7 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
           <button title="Sort By Random" onClick={() => handleSortOrder("random")}>🎲</button>
           <button title="Sort By Latest" onClick={() => handleSortOrder("new")}>🔥</button>
           <button title="Show Only Your Submissions" onClick={() => setSortedData(userSubmissions)}>👤</button>
+
           <GenericModal modalText="💡">
             <PromptSubmission />
           </GenericModal>
@@ -67,6 +68,10 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
               />
             </div>
           </GenericModal>
+          <button title="Clear The Instance And Class" onClick={() => {
+            setClassPrompt("");
+            setInstancePrompt("");
+          }}>🧻</button>
         </div>
 
         <div className="w-full h-screen ">
@@ -74,7 +79,7 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
             <RemixImageGrid>
               {sortedData.map((image: IPrompt) => (
                 <>
-                  <div className="relative hover:scale-90 cursor-pointer group hover:z-40">
+                  <div className="relative hover:scale-90 group hover:z-40">
                     <div className="h-full w-full z-40 absolute  hidden group-hover:block ">
                       <PromptListCard
                         prompt={image}
