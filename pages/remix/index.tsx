@@ -49,11 +49,11 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="mt-[10vh]">
-        <div className=" max-[720px]:hidden outlineBox w-1/2  mx-[25vw] space-x-2 p-2 my-2 flex justify-center ">
-          <button className=" h-[5vh]"  title="Sort By Random" onClick={() => handleSortOrder("random")}>🎲</button>
-          <button className=" h-[5vh]" title="Sort By Latest" onClick={() => handleSortOrder("new")}>🔥</button>
-          <button className=" h-[5vh]" title="Show Only Your Submissions" onClick={() => setSortedData(userSubmissions)}>👤</button>
+      <main className="">
+        <div className=" fixed left-0 top-[30%] m-2 z-[50] max-[720px]:hidden outlineBox  space-y-1 flex flex-col justify-center ">
+          <button title="Sort By Random" onClick={() => handleSortOrder("random")}>🎲</button>
+          <button title="Sort By Latest" onClick={() => handleSortOrder("new")}>🔥</button>
+          <button title="Show Only Your Submissions" onClick={() => setSortedData(userSubmissions)}>👤</button>
           <GenericModal modalText="💡">
             <PromptSubmission />
           </GenericModal>
@@ -69,8 +69,8 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
           </GenericModal>
         </div>
 
-        <div className="w-full h-[90vh] ">
-          <div className=" px-[20px] h-[90vh] overflow-y-auto ">
+        <div className="w-full h-screen ">
+          <div className=" px-[20px] overflow-y-auto ">
             <RemixImageGrid>
               {sortedData.map((image: IPrompt) => (
                 <>
