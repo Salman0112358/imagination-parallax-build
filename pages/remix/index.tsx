@@ -12,6 +12,7 @@ import RemixImageGrid from "../../components/RemixImageGrid/RemixImageGrid";
 import PromptListCard from "../../components/PromptListCard/PromptListCard";
 import PromptInstanceAndClassInput from "../../components/PromptInstanceAndClassInput/PromptInstanceAndClassInput";
 
+
 interface IPromptBuilder {
   data: IPrompt[];
 }
@@ -50,12 +51,13 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
 
       <main className="mt-[10vh]">
         <div className=" max-[720px]:hidden outlineBox w-1/2  mx-[25vw] space-x-2 p-2 my-2 flex justify-center ">
-          <button onClick={() => handleSortOrder("random")}>Random</button>
-          <button onClick={() => handleSortOrder("new")}>Newest</button>
-          <GenericModal modalText="Share">
+          <button className=" h-[5vh]"  title="Sort By Random" onClick={() => handleSortOrder("random")}>🎲</button>
+          <button className=" h-[5vh]" title="Sort By Latest" onClick={() => handleSortOrder("new")}>🔥</button>
+          <button className=" h-[5vh]" title="Show Only Your Submissions" onClick={() => setSortedData(userSubmissions)}>👤</button>
+          <GenericModal modalText="💡">
             <PromptSubmission />
           </GenericModal>
-          <GenericModal modalText="Remix">
+          <GenericModal modalText="🖊️">
             <div className="flex flex-row">
               <PromptInstanceAndClassInput
                 instancePrompt={instancePrompt}
