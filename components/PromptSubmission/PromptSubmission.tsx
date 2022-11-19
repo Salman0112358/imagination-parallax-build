@@ -95,18 +95,18 @@ const PromptSubmission = () => {
   return (
     <div className="flex flex-row h-[80vh] max-[1000px]:flex-col">
       <div className="outlineBox">
-          <div className="flex flex-row">
-            <textarea
-              className="promptTextArea w-full max-[1000px]:h-[10vh]"
-              name="prompt"
-              maxLength={1000}
-              placeholder="Enter your prompt ideas here"
-              rows={6}
-              value={promptIdea}
-              onChange={(event) => setPromptIdea(event.target.value)}
-              id="prompt-idea"
-            />
-          </div>
+        <div className="flex flex-row">
+          <textarea
+            className="promptTextArea w-full max-[1000px]:h-[10vh]"
+            name="prompt"
+            maxLength={1000}
+            placeholder="Enter your prompt ideas here"
+            rows={6}
+            value={promptIdea}
+            onChange={(event) => setPromptIdea(event.target.value)}
+            id="prompt-idea"
+          />
+        </div>
         <div className="flex flex-row mt-2 justify-center">
           <input
             type="file"

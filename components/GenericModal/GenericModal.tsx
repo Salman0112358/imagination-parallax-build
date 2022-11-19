@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { IoMdReturnLeft } from "react-icons/io";
 
 interface IGenricModal {
   children: React.ReactNode;
@@ -22,14 +23,12 @@ export const GenericModal = ({ children, modalText }: IGenricModal) => {
           <div className="fixed inset-0 z-10 overflow-y-auto">
             <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
               <div className="relative transform overflow-hidden rounded-lg bg-gray text-left shadow-xl transition-all">
+
+                <IoMdReturnLeft className="absolute right-0 cursor-pointer m-2 text-lg"
+                  onClick={() => setShowModal((prev) => !prev)} />
+
                 <div className="bg-black px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="relative sm:flex sm:items-start">
-                    <button
-                      className="absolute bottom-0 max-[1000px]:w-full"
-                      onClick={() => setShowModal((prev) => !prev)}
-                    >
-                      Exit
-                    </button>
                     {children}
                   </div>
                 </div>

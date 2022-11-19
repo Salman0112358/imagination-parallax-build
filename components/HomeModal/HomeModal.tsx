@@ -18,7 +18,7 @@ export default function HeadlessModal({ image }: singleImage) {
 
   return (
     <>
-      <div className=" w-full h-full hidden group-hover:block">
+      <div className=" w-full h-full  group-hover:block">
         <button
           type="button"
           onClick={openModal}

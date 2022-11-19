@@ -19,21 +19,21 @@ const PromptInstanceAndClassInput = ({
   };
 
   return (
-    <div className="outlineBox w-[70vw]">
-      <div className="flex flex-row items-center">
+    <div className="outlineBox w-[50vw] p-1">
+      <div className="flex items-center space-x-5">
         <input
-          className="promptInput"
-          placeholder="Instance Prompt"
+          className="promptInput h-[5vh]"
+          placeholder="Instance Prompt "
           value={instancePrompt}
           onChange={(event) => setInstancePrompt(event.target.value)}
         />
         <input
-          className="promptInput"
+          className="promptInput h-[5vh]"
           placeholder="Class Prompt"
           value={classPrompt}
           onChange={(event) => setClassPrompt(event.target.value)}
         />
-        <button className="h-[5vh]" onClick={handleClear}>
+        <button className="" onClick={handleClear}>
           Clear
         </button>
       </div>
