@@ -1,15 +1,12 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { singleImage } from "../../typescript";
-import { toast } from "react-toastify";
 
 import Image from "next/image";
 import handleCopy from "../../utils/handleCopy";
 
 export default function HeadlessModal({ image }: singleImage) {
   let [isOpen, setIsOpen] = useState(false);
-
-  const notify = () => toast("Prompt Copied To Clipboard");
 
   function closeModal() {
     setIsOpen(false);
@@ -85,7 +82,6 @@ export default function HeadlessModal({ image }: singleImage) {
                         className="inline-flex justify-center rounded-md border border-transparent bg-violet-900 px-4 py-2 text-sm font-medium text-slate-100 hover:bg-violet-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                         onClick={() => {
                           handleCopy(image.prompt);
-                          notify();
                         }}
                       >
                         Copy Prompt

@@ -1,7 +1,6 @@
 // 1. import `NextUIProvider` component
 import "../styles/globals.css";
 import { useState } from "react";
-import "react-toastify/dist/ReactToastify.css";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
 import type { AppProps } from "next/app";

@@ -2,6 +2,8 @@ import React from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { GenericModal } from "../GenericModal/GenericModal";
+import PromptSubmission from "../PromptSubmission/PromptSubmission";
 
 const NavbarHeader = (): JSX.Element => {
   const supabaseClient = useSupabaseClient();
@@ -21,26 +23,34 @@ const NavbarHeader = (): JSX.Element => {
     <header className="fixed bg-[#3f056e] bg-opacity-80 font-light text-xl text-slate-50 py-2 item px-2 hover:bg-[#800337]">
       <div className="flex items-center space-x-2 md:space-x-10">
         <ul className="flex space-x-4">
-          <li className="headerLink">
-            <Link href="/">Home</Link>
-          </li>
+          <button>
+            <li className="headerLink">
+              <Link href="/">Home</Link>
+            </li>
+          </button>
           {/* <li className="headerLink">
             {" "}
             <Link href="/imagine">Imagine</Link>
           </li> */}
           <li className="headerLink">
             {" "}
-            <Link href="/remix">Remix</Link>
+            <button>
+              {" "}
+              <Link href="/remix">Remix</Link>
+            </button>
           </li>
-
           <li className="headerLink">
             {" "}
-            <Link href="/community">Community</Link>
+            <button>
+              <Link href="/community">Community</Link>
+            </button>
           </li>
           {user ? (
             <>
-              <li className="font-semibold">
-                Welcome To The Imaginaton Parallax [{user?.email}]
+              <li>
+                <GenericModal modalText="Remix Prompt ">
+                  <PromptSubmission />
+                </GenericModal>
               </li>
               <li>
                 <button onClick={() => signOutUser()}>Sign Out</button>
@@ -48,10 +58,15 @@ const NavbarHeader = (): JSX.Element => {
               <li>
                 <button onClick={() => handleEditUser()}>Edit Profile</button>
               </li>
+              <li className="font-semibold">
+                Welcome To The Imaginaton Parallax [{user?.email}]
+              </li>
             </>
           ) : (
             <li>
-              <Link href="/login">Login</Link>
+              <button>
+                <Link href="/login">Login</Link>
+              </button>
             </li>
           )}
         </ul>

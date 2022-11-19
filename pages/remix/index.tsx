@@ -9,6 +9,7 @@ import PromptSubmission from "../../components/PromptSubmission/PromptSubmission
 import { IPrompt } from "../../typescript";
 import router from "next/router";
 import { GenericModal } from "../../components/GenericModal/GenericModal";
+import ImageCarousel from "../../components/ImageCarousel/ImageCarousel";
 
 interface IPromptBuilder {
   data: IPrompt[];
@@ -40,29 +41,25 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
       </Head>
       <main>
         <div className=" absolute inset-x-0 top-20 flex flex-col justify-center items-center space-y-5">
-          <div className="w-full flex items-center justify-center align-middle">
-            <GenericModal modalText="Remix Prompt ">
-              <PromptSubmission />
-            </GenericModal>
-          </div>
-          <div className="flex flex-row">
+          {/* <div className="flex flex-row">
             <PromptInstanceAndClassInput
               instancePrompt={instancePrompt}
               classPrompt={classPrompt}
               setInstancePrompt={setInstancePrompt}
               setClassPrompt={setClassPrompt}
             />
-          </div>
+          </div> */}
 
-          <div className="outlineBox w-[70vw] space-x-5">
+          {/* <div className="outlineBox w-[70vw] space-x-5">
             <button onClick={() => handleSortOrder("random")}>Random</button>
             <button onClick={() => handleSortOrder("new")}>Newest</button>
-          </div>
-          <PromptList
+          </div> */}
+          <ImageCarousel data={sortedData} />
+          {/* <PromptList
             data={sortedData}
             instancePrompt={instancePrompt}
             classPrompt={classPrompt}
-          />
+          /> */}
         </div>
       </main>
     </>
