@@ -61,6 +61,9 @@ const PromptSubmission = () => {
             render_image: imagePublicUrl,
             user_id: user?.id,
             username,
+            natural_width: dimensions[0],
+            natural_height: dimensions[1],
+
           },
         ]);
 

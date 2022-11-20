@@ -47,6 +47,8 @@ export interface IPrompt {
   render_image: string;
   inserted_at: string;
   username: string;
+  natural_width: number;
+  natural_height: number;
   kudos: number;
 }
 export interface IUserProfile {

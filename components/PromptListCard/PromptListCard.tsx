@@ -55,6 +55,9 @@ const PromptListCard = ({
           <span className="cursor-pointer inline-block bg-black rounded-full px-3 py-1 text-sm  text-white mr-2 mb-2">
             Posted by : {prompt.username}
           </span>
+          <span className="cursor-pointer inline-block bg-black rounded-full px-3 py-1 text-sm  text-white mr-2 mb-2">
+            Dimensions : {prompt.natural_width} X {prompt.natural_height}
+          </span>
         </div>
       </div>
     </>
