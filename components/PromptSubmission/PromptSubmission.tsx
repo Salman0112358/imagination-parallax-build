@@ -7,11 +7,15 @@ import LoadingImage from "../../assets/images/Loading-Preview.gif";
 import compressInputImageAndUpload from "../../utils/compressInputImageAndUpload";
 
 import addTextAtCursor from "../../utils/addTextAtCursor";
+import findImageWidthAndHeight from "../../utils/findImageWidth&Height";
 
 const PromptSubmission = () => {
   const [promptIdea, setPromptIdea] = useState("");
   const [previewImageUrl, setPreviewImageUrl] = useState<string>("");
   const [uploadFile, setUploadFile] = useState<File | null>();
+  const [dimensions, setDimensions] = useState<number[]>([])
+
+  console.log(dimensions)
 
   const user = useUser();
   const supabaseClient = useSupabaseClient();
@@ -78,6 +82,8 @@ const PromptSubmission = () => {
   const handleImagePreview = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (user && e.target.files) {
       const chosenFile: File = e.target.files[0];
+
+      findImageWidthAndHeight(chosenFile, setDimensions)
 
       if (chosenFile) {
         setPreviewImageUrl(URL.createObjectURL(chosenFile));
