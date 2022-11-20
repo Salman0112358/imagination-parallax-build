@@ -116,6 +116,11 @@ const PromptSubmission = () => {
             id="prompt-idea"
           />
         </div>
+        <div className="flex flex-row">
+
+        <input className="promptTextArea w-1/2" type="number" placeholder="Guidance Scale (Optional)"/>
+        <input className="promptTextArea w-1/2" type="string" placeholder="Sampling Method (Optional)"/>
+        </div>
         <div className="flex flex-row mt-2 justify-center">
           <input
             type="file"

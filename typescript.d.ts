@@ -49,6 +49,8 @@ export interface IPrompt {
   username: string;
   natural_width: number;
   natural_height: number;
+  guidance_scale: number;
+  sampling_method: string;
   kudos: number;
 }
 export interface IUserProfile {
