@@ -6,7 +6,6 @@ const getPromptImagePublicUrl = async (fileName: string, user: User) => {
     .from("user-images")
     .getPublicUrl(`images/${user.id}/` + fileName);
 
-
   return data.publicUrl;
 };
 

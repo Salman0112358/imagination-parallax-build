@@ -16,9 +16,9 @@ const PromptListCard = ({
 }: IPromptListCard) => {
   return (
     <>
-      <div className="relative opacity-60">
+      <div className="relative opacity-70">
         <button
-          className="absolute rounded-3xl right-0 w-1/4 m-1 hidden group-hover:block font-light"
+          className=" hover:bg-indigo-900 absolute rounded-3xl right-0 w-1/4 m-1 hidden group-hover:block font-light"
           onClick={() =>
             handleCopy(
               replaceInstanceAndClass(
@@ -31,7 +31,7 @@ const PromptListCard = ({
         >
           Copy
         </button>
-        <button className="absolute rounded-3xl left-0 w-1/4 m-1 hidden group-hover:block font-light">
+        <button className=" hover:bg-indigo-900 absolute rounded-3xl left-0 w-1/4 m-1 hidden group-hover:block font-light">
           Kudos
         </button>
       </div>

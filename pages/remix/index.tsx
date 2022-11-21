@@ -86,26 +86,29 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
             🧻
           </button>
         </div>
-          <div className=" px-[1vw] ">
-            <ImageGrid>
-              {data.map((image: IPrompt) => (
-                <div
-                  className={` group card ${image.natural_height / image.natural_width > 1 && "card-tall"
-                    } ${image.natural_height / image.natural_width < 1 && "card-wide"}   `}
-                  key={image.id}
-                  style={{ backgroundImage: `url('${image.render_image}')` }}
-                >
-                  <div className=" w-full h-full  absolute bottom-0  hidden group-hover:block ">
-                    <PromptListCard
-                      prompt={image}
-                      instancePrompt={instancePrompt}
-                      classPrompt={classPrompt}
-                    />
-                  </div>
+        <div className=" px-[1vw] ">
+          <ImageGrid>
+            {sortedData.map((image: IPrompt) => (
+              <div
+                className={` group card ${
+                  image.natural_height / image.natural_width > 1 && "card-tall"
+                } ${
+                  image.natural_height / image.natural_width < 1 && "card-wide"
+                }   `}
+                key={image.id}
+                style={{ backgroundImage: `url('${image.render_image}')` }}
+              >
+                <div className=" w-full h-full  absolute bottom-0  hidden group-hover:block ">
+                  <PromptListCard
+                    prompt={image}
+                    instancePrompt={instancePrompt}
+                    classPrompt={classPrompt}
+                  />
                 </div>
-              ))}
-            </ImageGrid>
-          </div>
+              </div>
+            ))}
+          </ImageGrid>
+        </div>
       </main>
     </>
   );
