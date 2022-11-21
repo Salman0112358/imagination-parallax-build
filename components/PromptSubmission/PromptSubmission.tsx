@@ -61,7 +61,6 @@ const PromptSubmission = () => {
           <textarea
             className="promptTextArea w-full max-[1000px]:h-[10vh]"
             name="prompt"
-            maxLength={1000}
             placeholder={`Enter your prompt ideas here : \n Guidance Scale, Sampling Method & Seed Are Optional`}
             rows={6}
             onChange={(e) => {
