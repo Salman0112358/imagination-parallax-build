@@ -25,6 +25,7 @@ const submitRemixPrompt = async (
     );
   } else {
     const imagePublicUrl = await compressInputImageAndUpload(uploadFile, user);
+    console.log(imagePublicUrl)
 
     let username = (
       await supabaseClient
@@ -33,6 +34,18 @@ const submitRemixPrompt = async (
         .eq("id", user.id)
         .single()
     ).data?.username;
+
+    console.log({
+      prompt: promptDetails.prompt,
+      render_image: imagePublicUrl,
+      user_id: user?.id,
+      username,
+      natural_width: dimensions[0],
+      natural_height: dimensions[1],
+      guidance_scale: promptDetails.guidance_scale,
+      sampling_method: promptDetails.sampling_method,
+      seed: promptDetails.seed,
+    })
 
     const { data, error } = await supabaseClient.from("remix_prompts").insert([
       {
