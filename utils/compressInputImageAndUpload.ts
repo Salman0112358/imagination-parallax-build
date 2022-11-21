@@ -33,7 +33,7 @@ const compressInputImageAndUpload = async (
     },
   });
 
-  return getPromptImagePublicUrl(dynamicFileName, user);
+  return await getPromptImagePublicUrl(dynamicFileName, user);
 };
 
 export default compressInputImageAndUpload;
