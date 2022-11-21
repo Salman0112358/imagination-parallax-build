@@ -51,6 +51,7 @@ export interface IPrompt {
   natural_height: number;
   guidance_scale: number;
   sampling_method: string;
+  seed: number;
   kudos: number;
 }
 export interface IUserProfile {
@@ -61,4 +62,11 @@ export interface IUserProfile {
   avatar_url: string;
   website: string;
   submissions: number;
+}
+
+export interface IPromptDetails {
+  prompt: string;
+  guidance_scale: number;
+  sampling_method: string;
+  seed: number;
 }
