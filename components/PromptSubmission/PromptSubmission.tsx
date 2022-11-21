@@ -4,89 +4,46 @@ import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { ImCross } from "react-icons/im";
 import LoadingImage from "../../assets/images/Loading-Preview.gif";
-import compressInputImageAndUpload from "../../utils/compressInputImageAndUpload";
-
 import addTextAtCursor from "../../utils/addTextAtCursor";
 import findImageWidthAndHeight from "../../utils/findImageWidth&Height";
+import { IPromptDetails } from "../../typescript";
+import submitRemixPrompt from "../../utils/submitRemixPrompt";
+
+const initialPromptDetails = {
+  prompt: "",
+  guidance_scale: 0,
+  sampling_method: "",
+  seed: 0,
+};
 
 const PromptSubmission = () => {
-  const [promptIdea, setPromptIdea] = useState("");
   const [previewImageUrl, setPreviewImageUrl] = useState<string>("");
   const [uploadFile, setUploadFile] = useState<File | null>();
-  const [dimensions, setDimensions] = useState<number[]>([])
-
-  console.log(dimensions)
+  const [dimensions, setDimensions] = useState<number[]>([]);
+  const [promptDetails, setPromptDetails] =
+    useState<IPromptDetails>(initialPromptDetails);
 
   const user = useUser();
   const supabaseClient = useSupabaseClient();
   const router = useRouter();
 
-  const handlePromptSubmission = async () => {
-    if (!promptIdea || !uploadFile || !user) {
-      return window.alert(
-        "You Must Be Logged In, And Have A Prompt With A Preview Image To Submit!"
-      );
-    }
+  const handlePromptDetails = (
+    promptDetails: IPromptDetails,
+    setPromptDetails: React.Dispatch<React.SetStateAction<IPromptDetails>>,
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
 
-    if (
-      !promptIdea.includes("{INSTANCE_PROMPT}") &&
-      !promptIdea.includes("{CLASS PROMPT}")
-    ) {
-      return window.alert(
-        "Your Prompt must include placeholders for the INSTANCE and CLASS"
-      );
-    } else {
-      const imagePublicUrl = await compressInputImageAndUpload(
-        uploadFile,
-        user
-      );
-
-      setPreviewImageUrl("");
-      setUploadFile(null);
-      setPromptIdea("");
-
-      let username = (
-        await supabaseClient
-          .from("profiles")
-          .select(`username`)
-          .eq("id", user.id)
-          .single()
-      ).data?.username;
-
-      const { data, error } = await supabaseClient
-        .from("remix_prompts")
-        .insert([
-          {
-            prompt: promptIdea,
-            render_image: imagePublicUrl,
-            user_id: user?.id,
-            username,
-            natural_width: dimensions[0],
-            natural_height: dimensions[1],
-
-          },
-        ]);
-
-      const currentPost = await supabaseClient
-        .from("profiles")
-        .select("submissions")
-        .eq("id", user.id);
-
-      if (currentPost.data) {
-        await supabaseClient
-          .from("profiles")
-          .update({ submissions: Number(currentPost.data[0].submissions + 1) })
-          .eq("id", user.id)
-          .select();
-      }
-    }
+    setPromptDetails({ ...promptDetails, [name]: value });
   };
 
   const handleImagePreview = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (user && e.target.files) {
       const chosenFile: File = e.target.files[0];
 
-      findImageWidthAndHeight(chosenFile, setDimensions)
+      findImageWidthAndHeight(chosenFile, setDimensions);
 
       if (chosenFile) {
         setPreviewImageUrl(URL.createObjectURL(chosenFile));
@@ -97,10 +54,6 @@ const PromptSubmission = () => {
     }
   };
 
-  const refreshPromptList = () => {
-    router.replace(router.asPath, undefined, { scroll: false });
-  };
-
   return (
     <div className="flex flex-row h-[80vh] max-[1000px]:flex-col">
       <div className="outlineBox">
@@ -109,17 +62,45 @@ const PromptSubmission = () => {
             className="promptTextArea w-full max-[1000px]:h-[10vh]"
             name="prompt"
             maxLength={1000}
-            placeholder="Enter your prompt ideas here"
+            placeholder={`Enter your prompt ideas here : \n Guidance Scale, Sampling Method & Seed Are Optional`}
             rows={6}
-            value={promptIdea}
-            onChange={(event) => setPromptIdea(event.target.value)}
+            onChange={(e) => {
+              handlePromptDetails(promptDetails, setPromptDetails, e);
+            }}
             id="prompt-idea"
           />
         </div>
         <div className="flex flex-row">
-
-        <input className="promptTextArea w-1/2" type="number" placeholder="Guidance Scale (Optional)"/>
-        <input className="promptTextArea w-1/2" type="string" placeholder="Sampling Method (Optional)"/>
+          <input
+            name="guidance_scale"
+            id="guidance_scale"
+            className="promptTextArea w-1/2"
+            type="number"
+            placeholder="Guidance Scale"
+            onChange={(e) =>
+              handlePromptDetails(promptDetails, setPromptDetails, e)
+            }
+          />
+          <input
+            name="sampling_method"
+            id="sampling_method"
+            className="promptTextArea w-1/2"
+            type="string"
+            placeholder="Sampling Method"
+            onChange={(e) =>
+              handlePromptDetails(promptDetails, setPromptDetails, e)
+            }
+          />
+          <input
+            name="seed"
+            id="seed"
+            className="promptTextArea w-1/2"
+            type="number"
+            placeholder="Seed"
+            onChange={(e) =>
+              handlePromptDetails(promptDetails, setPromptDetails, e)
+            }
+          />
         </div>
         <div className="flex flex-row mt-2 justify-center">
           <input
@@ -141,10 +122,12 @@ const PromptSubmission = () => {
                 "prompt-idea",
                 "{INSTANCE_PROMPT} {CLASS_PROMPT}"
               );
-              setPromptIdea(
-                (document.getElementById("prompt-idea") as HTMLTextAreaElement)
-                  .value
-              );
+              setPromptDetails({
+                ...promptDetails,
+                ["prompt"]: (
+                  document.getElementById("prompt-idea") as HTMLTextAreaElement
+                ).value,
+              });
             }}
           >
             Add Instance And Class
@@ -161,18 +144,27 @@ const PromptSubmission = () => {
             <button
               className="submitPromptButton"
               onClick={async () => {
-                await handlePromptSubmission();
-                refreshPromptList();
+                await submitRemixPrompt(
+                  promptDetails,
+                  uploadFile,
+                  dimensions,
+                  setUploadFile,
+                  setPreviewImageUrl,
+                  user,
+                  supabaseClient
+                );
               }}
             >
               Submit Prompt
             </button>
           )}
-          {promptIdea && (
+          {promptDetails.prompt && (
             <button
               className="submitPromptButton"
               onClick={() => {
-                setPromptIdea("");
+                (
+                  document.getElementById("prompt-idea") as HTMLInputElement
+                ).value = "";
                 setPreviewImageUrl("");
               }}
             >
@@ -199,8 +191,15 @@ const PromptSubmission = () => {
           <button
             className="absolute submitPromptButton bg-violet-900 text-slate-100 bottom-0 inset-x-0"
             onClick={async () => {
-              await handlePromptSubmission();
-              refreshPromptList();
+              await submitRemixPrompt(
+                promptDetails,
+                uploadFile,
+                dimensions,
+                setUploadFile,
+                setPreviewImageUrl,
+                user,
+                supabaseClient
+              );
             }}
           >
             Submit Prompt
