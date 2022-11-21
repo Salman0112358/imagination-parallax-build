@@ -32,8 +32,6 @@ const Home = ({ data }: LexicaImageArray) => {
               style={{ backgroundImage: `url(${image.src})` }}
             >
               <HeadlessModal image={image} />
-
-              {}
             </div>
           ))}
         </ImageGrid>
