@@ -8,9 +8,9 @@ import { IPrompt } from "../../typescript";
 import router from "next/router";
 import { GenericModal } from "../../components/GenericModal/GenericModal";
 import extractUserRemixSubmissions from "../../utils/extractUserRemixSubmissions";
-import RemixImageGrid from "../../components/RemixImageGrid/RemixImageGrid";
 import PromptListCard from "../../components/PromptListCard/PromptListCard";
 import PromptInstanceAndClassInput from "../../components/PromptInstanceAndClassInput/PromptInstanceAndClassInput";
+import ImageGrid from "../../components/ImageGrid/ImageGrid";
 
 interface IPromptBuilder {
   data: IPrompt[];
@@ -86,32 +86,26 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
             🧻
           </button>
         </div>
-
-        <div className="w-full h-screen ">
-          <div className=" px-[20px] overflow-y-auto ">
-            <RemixImageGrid>
-              {sortedData.map((image: IPrompt) => (
+          <div className=" px-[1vw] ">
+            <ImageGrid>
+              {data.map((image: IPrompt) => (
                 <div
-                  className="relative hover:scale-90 group hover:z-40"
+                  className={` group card ${image.natural_height / image.natural_width > 1 && "card-tall"
+                    } ${image.natural_height / image.natural_width < 1 && "card-wide"}   `}
                   key={image.id}
+                  style={{ backgroundImage: `url('${image.render_image}')` }}
                 >
-                  <div className="h-full w-full z-40 absolute  hidden group-hover:block ">
+                  <div className=" w-full h-full  absolute bottom-0  hidden group-hover:block ">
                     <PromptListCard
                       prompt={image}
                       instancePrompt={instancePrompt}
                       classPrompt={classPrompt}
                     />
                   </div>
-                  <img
-                    className="group p-1  transition ease-in-out  !rounded-3xl"
-                    src={image.render_image}
-                    style={{ width: "100%", display: "block" }}
-                  />
                 </div>
               ))}
-            </RemixImageGrid>
+            </ImageGrid>
           </div>
-        </div>
       </main>
     </>
   );
