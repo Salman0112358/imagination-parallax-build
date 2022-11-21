@@ -35,29 +35,36 @@ const PromptListCard = ({
           Kudos
         </button>
       </div>
-      <div
-        className=" absolute bottom-0 w-full  overflow-hidden shadow-lg 
-    bg-gradient-to-r from-gray-700 via-gray-900 to-black opacity-60
-    
-    "
-      >
-        <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2 text-violet-300"></div>
-          <p className="text-white text-base font-light">
+      <div className=" absolute bottom-0 w-full overflow-hidden  opacity-70">
+        {/* <div className="px-6 py-4">
+          <div className="font-bold text-xl mb-2 text-violet-300"> <p className="text-white font-light text-sm">
             {replaceInstanceAndClass(
               prompt.prompt,
               instancePrompt,
               classPrompt
             )}
-          </p>
-        </div>
-        <div className="px-4 font-light">
+          </p></div>
+         
+        </div> */}
+        <div className="px-4 py-4 font-light">
           <span className="cursor-pointer inline-block bg-black rounded-full px-3 py-1 text-sm  text-white mr-2 mb-2">
             Posted by : {prompt.username}
           </span>
           <span className="cursor-pointer inline-block bg-black rounded-full px-3 py-1 text-sm  text-white mr-2 mb-2">
             Dimensions : {prompt.natural_width} X {prompt.natural_height}
           </span>
+          {prompt.guidance_scale && (
+            <span className="cursor-pointer inline-block bg-black rounded-full px-3 py-1 text-sm  text-white mr-2 mb-2">
+              Guidance : {prompt.guidance_scale}
+            </span>
+          )}
+
+          {/* <span className="cursor-pointer inline-block bg-black rounded-full px-3 py-1 text-sm  text-white mr-2 mb-2">
+            Sampling Method : {prompt.sampling_method}
+          </span>
+          <span className="cursor-pointer inline-block bg-black rounded-full px-3 py-1 text-sm  text-white mr-2 mb-2">
+            Seed : {prompt.seed}
+          </span> */}
         </div>
       </div>
     </>
