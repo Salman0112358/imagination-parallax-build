@@ -21,7 +21,6 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
   const [classPrompt, setClassPrompt] = useState("");
   const [sortedData, setSortedData] = useState<IPrompt[]>([]);
   const [userSubmissions, setUserSubmissions] = useState<IPrompt[]>([]);
-  
 
   const user = useUser();
 
