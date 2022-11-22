@@ -34,7 +34,7 @@ const submitRemixPrompt = async (
         .eq("id", user.id)
         .single()
     ).data?.username;
-    
+
     const { data, error } = await supabaseClient.from("remix_prompts").insert([
       {
         prompt: promptDetails.prompt,
