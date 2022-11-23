@@ -15,8 +15,8 @@ const remixPage = ({ data }: { data: IPrompt[] }) => {
     console.log(localStorage.getItem("class"));
     console.log(localStorage.getItem("instance"));
     setUserInstanceAndClass({
-      instancePrompt: localStorage.getItem("class") as string,
-      classPrompt: localStorage.getItem("instance") as string,
+      instancePrompt: localStorage.getItem("instance") as string,
+      classPrompt: localStorage.getItem("class") as string,
     });
   }, []);
 
