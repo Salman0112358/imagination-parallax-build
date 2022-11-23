@@ -70,3 +70,15 @@ export interface IPromptDetails {
   sampling_method: string;
   seed: number;
 }
+
+
+export interface IUserInstanceAndClass {
+  instancePrompt: string;
+  classPrompt: string;
+}
+
+export interface IPromptInstanceAndClassInput {
+  userInstanceAndClass: IUserInstanceAndClass,
+  setUserInstanceAndClass: React.Dispatch<React.SetStateAction<IUserInstanceAndClass>>
+
+}
