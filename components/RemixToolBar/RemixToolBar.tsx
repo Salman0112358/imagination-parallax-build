@@ -24,30 +24,30 @@ const RemixToolBar = ({
     useEffect(() => {
         user && setUserSubmissions(extractUserRemixSubmissions(data, user.id));
     }, [user]);
-
+    
     return (
-        <div className=" fixed left-0 top-[30%] m-2 z-[50] max-[720px]:hidden outlineBox  space-y-1 flex flex-col justify-center ">
+        <div className="flex left-[50%] p-2  space-x-1  justify-center  bg-black/50 rounded-lg" >
             <button
                 title="Sort By Random"
-                onClick={() => randomSortArray(sortedData, setSortedData)}
+                onClick={() => setSortedData([...randomSortArray(sortedData)])}
             >
-                🎲
+                🎲 Random
             </button>
-            <button title="Sort By Latest" onClick={() => setSortedData(data)}>
-                🔥
+            <button title="Sort By Latest" onClick={() => setSortedData([...data]) }>
+                🔥 Newest
             </button>
             {user && (
                 <button
                     title="Show Only Your Submissions"
                     onClick={() => setSortedData(userSubmissions)}
                 >
-                    👤
+                    👤 Submitted
                 </button>
             )}
-            <GenericModal modalText="💡">
+            <GenericModal modalText="💡 Upload">
                 <PromptSubmission />
             </GenericModal>
-            <GenericModal modalText="🖊️">
+            <GenericModal modalText="🖊️ Remix">
                 <div className="flex flex-row">
                     <PromptInstanceAndClassInput
                         instancePrompt={instancePrompt}
@@ -57,15 +57,6 @@ const RemixToolBar = ({
                     />
                 </div>
             </GenericModal>
-            <button
-                title="Clear The Instance And Class"
-                onClick={() => {
-                    setClassPrompt("");
-                    setInstancePrompt("");
-                }}
-            >
-                🧻
-            </button>
         </div>
     );
 };

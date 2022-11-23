@@ -22,15 +22,17 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="mt-[8vh]">
-        <div className=" px-[1vw] ">
-          <RemixToolBar
+        <div className="sticky top-[8vh] z-50">
+        <RemixToolBar
             sortedData={sortedData}
             setSortedData={setSortedData}
             instancePrompt={instancePrompt}
             classPrompt={classPrompt}
             setInstancePrompt={setInstancePrompt}
             setClassPrompt={setClassPrompt}
-            data={data} />
+            data={data}/>
+
+        </div>
           <ImageGrid>
             {sortedData.map((image: IPrompt) => (
               <div
@@ -50,7 +52,6 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
               </div>
             ))}
           </ImageGrid>
-        </div>
       </main>
     </>
   );

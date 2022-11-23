@@ -1,9 +1,8 @@
-const randomSortArray = (
-  inputArray: any,
-  setState: React.Dispatch<React.SetStateAction<any[]>>
-) => {
-    console.log("sorting by random")
-  setState(inputArray.sort(() => Math.random() - 0.5));
+const randomSortArray = (inputArray: any) => {
+
+  const randomArray = inputArray.sort(() => Math.random() - 0.5)
+  return randomArray
 };
+
 
 export default randomSortArray;
