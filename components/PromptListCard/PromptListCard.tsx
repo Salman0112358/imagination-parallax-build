@@ -14,9 +14,9 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
 
   return (
     <>
-      <div className="relative opacity-70">
+      <div className="relative opacity-90">
         <button
-          className=" hover:bg-indigo-900 absolute rounded-3xl right-0 w-1/4 m-1 hidden group-hover:block font-light"
+          className=" hover:bg-indigo-900 absolute rounded-md right-0  m-1 hidden group-hover:block font-light"
           onClick={() => {
             handleCopy(
               replaceInstanceAndClass(
@@ -29,9 +29,9 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
           }}
         >
           Copy
-        </button>
+        </button>    
         <button
-          className=" text-center hover:bg-indigo-900 absolute rounded-3xl left-0 w-1/4 m-1 hidden group-hover:block font-light"
+          className=" text-center hover:bg-indigo-900 absolute rounded-md left-0 m-1 hidden group-hover:block font-light"
           onClick={() => {
             notify("🎉Kudos Sent🎉");
           }}
@@ -39,28 +39,28 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
           Kudos
         </button>
       </div>
-      <div className="absolute bottom-0 w-full opacity-70 text-[0px]">
-        <div className="px-4 py-1 font-light">
-          <span className="inline-block bg-black rounded-full px-3 py-1 text-sm  text-white">
-            Posted by : {prompt.username}
+      <div className=" text-base px-1 py-1 font-light absolute bottom-0 w-full opacity-90 text-[0px]">
+        <span className="inline-block bg-black rounded-md px-3 py-1 text-white">
+          Posted by : {prompt.username}
+        </span>
+        <span className="inline-block bg-black rounded-md px-3 py-1 text-white">
+        Kudos ❤️ : {prompt.kudos}
+        </span>
+        <span className="inline-block bg-black rounded-md px-3 py-1 text-white">
+          Prompt : {replaceInstanceAndClass(
+            prompt.prompt,
+            userInstanceAndClass.instancePrompt,
+            userInstanceAndClass.classPrompt
+          ).slice(0, 80)}...
+        </span>
+        {/* <span className="inline-block bg-black rounded-full px-3 py-1 text-white">
+          Dimensions : {prompt.natural_width} X {prompt.natural_height}
+        </span>
+        {prompt.guidance_scale && (
+          <span className="inline-block bg-black rounded-full px-3 py-1 text-white">
+            Guidance : {prompt.guidance_scale}
           </span>
-          <span className="inline-block bg-black rounded-md px-3 py-1 text-sm  text-white">
-            Posted by :{" "}
-            {replaceInstanceAndClass(
-              prompt.prompt,
-              userInstanceAndClass.instancePrompt,
-              userInstanceAndClass.classPrompt
-            )}
-          </span>
-          <span className="inline-block bg-black rounded-full px-3 py-1 text-sm  text-white">
-            Dimensions : {prompt.natural_width} X {prompt.natural_height}
-          </span>
-          {prompt.guidance_scale && (
-            <span className="inline-block bg-black rounded-full px-3 py-1 text-sm  text-white">
-              Guidance : {prompt.guidance_scale}
-            </span>
-          )}
-        </div>
+        )} */}
       </div>
     </>
   );
