@@ -35,14 +35,14 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
           Kudos
         </button>
       </div>
-      <div className=" text-base px-1 py-1 font-light absolute bottom-0 w-full opacity-90 text-[0px]">
-        <span className="inline-block bg-black rounded-md px-3 py-1 text-white">
+      <div className="px-1 py-1 font-light absolute bottom-0 w-full opacity-90 text-[0px]">
+        <span className=" text-base inline-block bg-black rounded-md px-3 py-1 text-white">
           Posted by : {prompt.username}
         </span>
-        <span className="inline-block bg-black rounded-md px-3 py-1 text-white">
+        <span className="text-base inline-block bg-black rounded-md px-3 py-1 text-white">
         Kudos ❤️ : {prompt.kudos}
         </span>
-        <span className="inline-block bg-black rounded-md px-3 py-1 text-white">
+        <span className="text-base inline-block bg-black rounded-md px-3 py-1 text-white">
           Prompt : {replaceInstanceAndClass(
             prompt.prompt,
             userInstanceAndClass.instancePrompt,
