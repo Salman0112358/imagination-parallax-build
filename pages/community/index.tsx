@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import AccordionCard from "../../components/AccordionCard/AccordionCard";
 import MostLikedPost from "../../components/MostLikedPost/MostLikedPost";
 import PromptKeywordCounter from "../../components/PromptKeywordCounter/PromptKeywordCounter";
 import UsersList from "../../components/UsersList/UsersList";
@@ -13,9 +14,10 @@ interface ICommunityPage {
 const CommunityPage = ({ data, userList }: ICommunityPage) => {
   return (
     <>
-      <div className="flex flex-row mt-[8vh] mx-5 w-screen space-x-5">
+      <div className="flex flex-col mt-[8vh]">
+        <AccordionCard data={data}/>
         <UsersList userList={userList} />
-        <MostLikedPost data={data} />
+        {/* <MostLikedPost data={data} /> */}
         <PromptKeywordCounter data={data} />
       </div>
     </>
