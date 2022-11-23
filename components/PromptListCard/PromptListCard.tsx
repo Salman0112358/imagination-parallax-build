@@ -2,15 +2,13 @@ import React from "react";
 import { IPrompt, IUserInstanceAndClass } from "../../typescript";
 import handleCopy from "../../utils/handleCopy";
 import replaceInstanceAndClass from "../../utils/replaceInstanceAndClass";
-import { toast } from "react-toastify";
 interface IPromptListCard {
   prompt: IPrompt;
   userInstanceAndClass: IUserInstanceAndClass;
 }
 
 const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
-  const notify = (message: string) =>
-    toast.success(message, { autoClose: 500, hideProgressBar: true });
+
 
   return (
     <>
@@ -25,7 +23,6 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
                 userInstanceAndClass.classPrompt
               )
             );
-            notify("Copied To 📋");
           }}
         >
           Copy
@@ -33,7 +30,6 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
         <button
           className=" text-center hover:bg-indigo-900 absolute rounded-md left-0 m-1 hidden group-hover:block font-light"
           onClick={() => {
-            notify("🎉Kudos Sent🎉");
           }}
         >
           Kudos

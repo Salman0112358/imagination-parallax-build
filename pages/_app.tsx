@@ -4,8 +4,6 @@ import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
 import type { AppProps } from "next/app";
 import NavbarHeader from "../components/NavbarHeader/NavbarHeader";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export default function App({
   Component,
@@ -23,18 +21,6 @@ export default function App({
       >
         <NavbarHeader />
         <Component {...pageProps} />
-        {/* <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-        /> */}
       </SessionContextProvider>
     </>
   );
