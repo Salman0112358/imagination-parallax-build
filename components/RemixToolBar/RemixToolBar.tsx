@@ -1,29 +1,31 @@
 import { useUser } from "@supabase/auth-helpers-react";
 import React, { useEffect, useState } from "react";
-import { IPrompt } from "../../typescript";
+import { IPrompt, IUserInstanceAndClass } from "../../typescript";
 import extractUserRemixSubmissions from "../../utils/extractUserRemixSubmissions";
 import randomSortArray from "../../utils/randomSortArray";
 import { GenericModal } from "../GenericModal/GenericModal";
 import PromptInstanceAndClassInput from "../PromptInstanceAndClassInput/PromptInstanceAndClassInput";
 import PromptSubmission from "../PromptSubmission/PromptSubmission";
 
-
+interface IRemixToolBar {
+  sortedData: IPrompt[],
+  setSortedData: React.Dispatch<React.SetStateAction<IPrompt[]>>
+  data: IPrompt[]
+  userInstanceAndClass: IUserInstanceAndClass,
+  setUserInstanceAndClass: React.Dispatch<React.SetStateAction<IUserInstanceAndClass>>
+}
 
 const RemixToolBar = ({
   sortedData,
   setSortedData,
-  instancePrompt,
-  classPrompt,
-  setInstancePrompt,
-  setClassPrompt,
   data,
-}: any) => {
+  userInstanceAndClass,
+  setUserInstanceAndClass
+
+}: IRemixToolBar) => {
   const [userSubmissions, setUserSubmissions] = useState<IPrompt[]>([]);
 
   const user = useUser();
-
-
-
 
   useEffect(() => {
     user && setUserSubmissions(extractUserRemixSubmissions(data, user.id));
@@ -56,10 +58,8 @@ const RemixToolBar = ({
       <GenericModal modalText="🖊️ Remix">
         <div className="flex flex-row">
           <PromptInstanceAndClassInput
-            instancePrompt={instancePrompt}
-            classPrompt={classPrompt}
-            setInstancePrompt={setInstancePrompt}
-            setClassPrompt={setClassPrompt}
+            userInstanceAndClass={userInstanceAndClass}
+            setUserInstanceAndClass={setUserInstanceAndClass}
           />
         </div>
       </GenericModal>
