@@ -1,6 +1,6 @@
 import { supabase } from "../../utils/supabaseClient";
 import Head from "next/head";
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { IPrompt } from "../../typescript";
 import PromptListCard from "../../components/PromptListCard/PromptListCard";
 import ImageGrid from "../../components/ImageGrid/ImageGrid";
@@ -14,7 +14,7 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
   const [instancePrompt, setInstancePrompt] = useState("");
   const [classPrompt, setClassPrompt] = useState("");
   const [sortedData, setSortedData] = useState<IPrompt[]>(data);
-  
+
   return (
     <>
       <Head>
@@ -23,35 +23,37 @@ const PromptBuilder = ({ data }: IPromptBuilder) => {
       </Head>
       <main className="mt-[8vh]">
         <div className="sticky top-[8vh] z-50">
-        <RemixToolBar
+          <RemixToolBar
             sortedData={sortedData}
             setSortedData={setSortedData}
             instancePrompt={instancePrompt}
             classPrompt={classPrompt}
             setInstancePrompt={setInstancePrompt}
             setClassPrompt={setClassPrompt}
-            data={data}/>
-
+            data={data}
+          />
         </div>
-          <ImageGrid>
-            {sortedData.map((image: IPrompt) => (
-              <div
-                className={` group card ${image.natural_height / image.natural_width > 1 && "card-tall"
-                  } ${image.natural_height / image.natural_width < 1 && "card-wide"
-                  }   `}
-                key={image.id}
-                style={{ backgroundImage: `url('${image.render_image}')` }}
-              >
-                <div className=" w-full h-full  absolute bottom-0  hidden group-hover:block ">
-                  <PromptListCard
-                    prompt={image}
-                    instancePrompt={instancePrompt}
-                    classPrompt={classPrompt}
-                  />
-                </div>
+        <ImageGrid>
+          {sortedData.map((image: IPrompt) => (
+            <div
+              className={` group card ${
+                image.natural_height / image.natural_width > 1 && "card-tall"
+              } ${
+                image.natural_height / image.natural_width < 1 && "card-wide"
+              }   `}
+              key={image.id}
+              style={{ backgroundImage: `url('${image.render_image}')` }}
+            >
+              <div className=" w-full h-full  absolute bottom-0  hidden group-hover:block ">
+                <PromptListCard
+                  prompt={image}
+                  instancePrompt={instancePrompt}
+                  classPrompt={classPrompt}
+                />
               </div>
-            ))}
-          </ImageGrid>
+            </div>
+          ))}
+        </ImageGrid>
       </main>
     </>
   );
