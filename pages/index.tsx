@@ -23,7 +23,7 @@ const Home = ({ data }: LexicaImageArray) => {
       </div>
       <main className="relative px-10 pb-24 lg:space-y-24">
         <ImageGrid>
-          {data.map((image: LexicaImage) => (
+          {gridImageArray.map((image: LexicaImage) => (
             <div
               className={` group cursor-pointer card ${
                 image.height / image.width > 1 && "card-tall"
