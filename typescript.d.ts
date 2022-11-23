@@ -71,14 +71,14 @@ export interface IPromptDetails {
   seed: number;
 }
 
-
 export interface IUserInstanceAndClass {
   instancePrompt: string;
   classPrompt: string;
 }
 
 export interface IPromptInstanceAndClassInput {
-  userInstanceAndClass: IUserInstanceAndClass,
-  setUserInstanceAndClass: React.Dispatch<React.SetStateAction<IUserInstanceAndClass>>
-
+  userInstanceAndClass: IUserInstanceAndClass;
+  setUserInstanceAndClass: React.Dispatch<
+    React.SetStateAction<IUserInstanceAndClass>
+  >;
 }

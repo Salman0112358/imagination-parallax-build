@@ -8,11 +8,13 @@ import PromptInstanceAndClassInput from "../PromptInstanceAndClassInput/PromptIn
 import PromptSubmission from "../PromptSubmission/PromptSubmission";
 
 interface IRemixToolBar {
-  sortedData: IPrompt[],
-  setSortedData: React.Dispatch<React.SetStateAction<IPrompt[]>>
-  data: IPrompt[]
-  userInstanceAndClass: IUserInstanceAndClass,
-  setUserInstanceAndClass: React.Dispatch<React.SetStateAction<IUserInstanceAndClass>>
+  sortedData: IPrompt[];
+  setSortedData: React.Dispatch<React.SetStateAction<IPrompt[]>>;
+  data: IPrompt[];
+  userInstanceAndClass: IUserInstanceAndClass;
+  setUserInstanceAndClass: React.Dispatch<
+    React.SetStateAction<IUserInstanceAndClass>
+  >;
 }
 
 const RemixToolBar = ({
@@ -20,8 +22,7 @@ const RemixToolBar = ({
   setSortedData,
   data,
   userInstanceAndClass,
-  setUserInstanceAndClass
-
+  setUserInstanceAndClass,
 }: IRemixToolBar) => {
   const [userSubmissions, setUserSubmissions] = useState<IPrompt[]>([]);
 

@@ -7,22 +7,20 @@ import ImageGrid from "../../components/ImageGrid/ImageGrid";
 import RemixToolBar from "../../components/RemixToolBar/RemixToolBar";
 
 const remixPage = ({ data }: { data: IPrompt[] }) => {
-
   const [userInstanceAndClass, setUserInstanceAndClass] =
-    useState<IUserInstanceAndClass>({instancePrompt: "",classPrompt: ""});
+    useState<IUserInstanceAndClass>({ instancePrompt: "", classPrompt: "" });
   const [sortedData, setSortedData] = useState<IPrompt[]>(data);
 
   useEffect(() => {
-
-    console.log(localStorage.getItem("class"))
-    console.log(localStorage.getItem("instance"))
+    console.log(localStorage.getItem("class"));
+    console.log(localStorage.getItem("instance"));
     setUserInstanceAndClass({
-      instancePrompt : localStorage.getItem("class") as string,
-      classPrompt : localStorage.getItem("instance") as string
-    })
-  }, [])
+      instancePrompt: localStorage.getItem("class") as string,
+      classPrompt: localStorage.getItem("instance") as string,
+    });
+  }, []);
 
-  console.log(userInstanceAndClass)
+  console.log(userInstanceAndClass);
 
   return (
     <>
@@ -43,9 +41,11 @@ const remixPage = ({ data }: { data: IPrompt[] }) => {
         <ImageGrid>
           {sortedData.map((image: IPrompt) => (
             <div
-              className={` group card ${image.natural_height / image.natural_width > 1 && "card-tall"
-                } ${image.natural_height / image.natural_width < 1 && "card-wide"
-                }   `}
+              className={` group card ${
+                image.natural_height / image.natural_width > 1 && "card-tall"
+              } ${
+                image.natural_height / image.natural_width < 1 && "card-wide"
+              }   `}
               key={image.id}
               style={{ backgroundImage: `url('${image.render_image}')` }}
             >

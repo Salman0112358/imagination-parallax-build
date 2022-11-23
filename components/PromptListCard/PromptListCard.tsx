@@ -5,18 +5,12 @@ import replaceInstanceAndClass from "../../utils/replaceInstanceAndClass";
 import { toast } from "react-toastify";
 interface IPromptListCard {
   prompt: IPrompt;
-  userInstanceAndClass: IUserInstanceAndClass,
+  userInstanceAndClass: IUserInstanceAndClass;
 }
 
-const PromptListCard = ({
-  prompt,
-  userInstanceAndClass,
-
-}: IPromptListCard) => {
+const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
   const notify = (message: string) =>
     toast.success(message, { autoClose: 500, hideProgressBar: true });
-
-
 
   return (
     <>
@@ -51,7 +45,8 @@ const PromptListCard = ({
             Posted by : {prompt.username}
           </span>
           <span className="inline-block bg-black rounded-md px-3 py-1 text-sm  text-white">
-            Posted by : {replaceInstanceAndClass(
+            Posted by :{" "}
+            {replaceInstanceAndClass(
               prompt.prompt,
               userInstanceAndClass.instancePrompt,
               userInstanceAndClass.classPrompt
