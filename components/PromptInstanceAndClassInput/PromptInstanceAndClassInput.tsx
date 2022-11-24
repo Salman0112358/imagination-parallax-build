@@ -20,7 +20,7 @@ const PromptInstanceAndClassInput = ({
     setUserInstanceAndClass({ ...userInstanceAndClass, [name]: value });
   };
   return (
-    <div className=" flex flex-col space-y-4 justify-center items-center  w-[80vw] h-screen">
+    <div className=" flex flex-col space-y-4 justify-center items-center  w-[50vw] h-screen">
       {/* Inputs here */}
       <input
         name="instancePrompt"

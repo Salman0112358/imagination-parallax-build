@@ -4,7 +4,6 @@ import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { ImCross } from "react-icons/im";
 import LoadingImage from "../../assets/images/Loading-Preview.gif";
-import addTextAtCursor from "../../utils/addTextAtCursor";
 import findImageWidthAndHeight from "../../utils/findImageWidth&Height";
 import { IPromptDetails } from "../../typescript";
 import submitRemixPrompt from "../../utils/submitRemixPrompt";
@@ -55,14 +54,14 @@ const PromptSubmission = () => {
   };
 
   return (
-    <div className="flex flex-row h-[80vh] max-[1000px]:flex-col">
+    <div className="flex-col space-y-4 w-[80vw] h-[100vh] m-6">
       <div className="outlineBox">
         <div className="flex flex-row">
           <textarea
-            className="promptTextArea w-full max-[1000px]:h-[10vh]"
+            className="promptTextArea w-full"
             name="prompt"
             placeholder={`Enter your prompt ideas here : \n Guidance Scale, Sampling Method & Seed Are Optional`}
-            rows={6}
+            rows={4}
             onChange={(e) => {
               handlePromptDetails(promptDetails, setPromptDetails, e);
             }}
@@ -73,7 +72,7 @@ const PromptSubmission = () => {
           <input
             name="guidance_scale"
             id="guidance_scale"
-            className="promptTextArea w-1/2"
+            className="promptTextArea"
             type="number"
             placeholder="Guidance Scale"
             onChange={(e) =>
@@ -83,7 +82,7 @@ const PromptSubmission = () => {
           <input
             name="sampling_method"
             id="sampling_method"
-            className="promptTextArea w-1/2"
+            className="promptTextArea"
             type="string"
             placeholder="Sampling Method"
             onChange={(e) =>
@@ -93,7 +92,7 @@ const PromptSubmission = () => {
           <input
             name="seed"
             id="seed"
-            className="promptTextArea w-1/2"
+            className="promptTextArea"
             type="number"
             placeholder="Seed"
             onChange={(e) =>
@@ -101,78 +100,42 @@ const PromptSubmission = () => {
             }
           />
         </div>
-        <div className="flex flex-row mt-2 justify-center">
-          <input
-            type="file"
-            name="render"
-            id="upload-render"
-            accept="image/png, image/jpeg"
-            className="hidden"
-            onChange={(e) => {
-              handleImagePreview(e);
-            }}
-          />
-
-          <button
-            className="submitPromptButton py-2"
-            title="Highlight the part of your prompt you want to replace with the instance and class placeholders"
-            onClick={() => {
-              addTextAtCursor(
-                "prompt-idea",
-                "{INSTANCE_PROMPT} {CLASS_PROMPT}"
-              );
-              setPromptDetails({
-                ...promptDetails,
-                ["prompt"]: (
-                  document.getElementById("prompt-idea") as HTMLTextAreaElement
-                ).value,
-              });
-            }}
-          >
-            Add Instance And Class
-          </button>
-
-          <button
-            className="submitPromptButton"
-            onClick={() => document.getElementById("upload-render")?.click()}
-          >
-            Preview Render
-          </button>
-
-          {!previewImageUrl && (
-            <button
-              className="submitPromptButton"
-              onClick={async () => {
-                await submitRemixPrompt(
-                  promptDetails,
-                  uploadFile,
-                  dimensions,
-                  setUploadFile,
-                  setPreviewImageUrl,
-                  user,
-                  supabaseClient
-                );
-              }}
-            >
-              Submit Prompt
-            </button>
-          )}
-          {promptDetails.prompt && (
-            <button
-              className="submitPromptButton"
-              onClick={() => {
-                (
-                  document.getElementById("prompt-idea") as HTMLInputElement
-                ).value = "";
-                setPreviewImageUrl("");
-              }}
-            >
-              Clear All
-            </button>
-          )}
-        </div>
       </div>
-      <div className=" flex justify-center relative outlineBox text-violet-300 min-[1000px]:mx-2 max-[1000px]:h-[50vh] max-[1000px]:mt-[10px]  ">
+      {/* buttons! */}
+      <div className="flex flex-row outlineBox p-1 justify-evenly">
+        <input
+          type="file"
+          name="render"
+          id="upload-render"
+          accept="image/png, image/jpeg"
+          className="hidden"
+          onChange={(e) => {
+            handleImagePreview(e);
+          }}
+        />
+        <button
+          className="w-[45%] max-h-[40px] "
+
+          onClick={() => document.getElementById("upload-render")?.click()}
+        >
+          Preview
+        </button>
+        <button
+            className="w-[45%] max-h-[40px] "
+
+          onClick={() => {
+            (
+              document.getElementById("prompt-idea") as HTMLInputElement
+            ).value = "";
+            setPreviewImageUrl("");
+          }}
+        >
+          Clear All
+        </button>
+
+      </div>
+      {/* Image preview box */}
+      <div className=" flex justify-center items-center relative outlineBox text-violet-300 h-[60%]">
         <Image
           src={previewImageUrl ? previewImageUrl : LoadingImage}
           width={512}
