@@ -6,7 +6,7 @@ import PromptListCard from "../../components/PromptListCard/PromptListCard";
 import ImageGrid from "../../components/ImageGrid/ImageGrid";
 import RemixToolBar from "../../components/RemixToolBar/RemixToolBar";
 
-const remixPage = ({ data }: { data: IPrompt[] }) => {
+const RemixPage = ({ data }: { data: IPrompt[] }) => {
   const [userInstanceAndClass, setUserInstanceAndClass] =
     useState<IUserInstanceAndClass>({ instancePrompt: "", classPrompt: "" });
   const [sortedData, setSortedData] = useState<IPrompt[]>(data);
@@ -31,7 +31,6 @@ const remixPage = ({ data }: { data: IPrompt[] }) => {
       <main className="mt-[8vh]">
         <div className="sticky top-[8vh] z-50">
           <RemixToolBar
-            sortedData={sortedData}
             setSortedData={setSortedData}
             data={data}
             userInstanceAndClass={userInstanceAndClass}
@@ -63,7 +62,7 @@ const remixPage = ({ data }: { data: IPrompt[] }) => {
   );
 };
 
-export default remixPage;
+export default RemixPage;
 
 export async function getServerSideProps() {
   const { data, error } = await supabase

@@ -85,7 +85,7 @@ const AccordionCard = ({
             >
               <div className="w-[85%] grid grid-rows-3 grid-flow-col gap-4 p-1  h-[90%] ">
                 {userList.map((user: IUserProfile) => (
-                  <div className=" flex items-center justify-center rounded-3xl bg-rose-900/90">
+                  <div key={user.id} className=" flex items-center justify-center rounded-3xl bg-rose-900/90">
                     {user.username}
                   </div>
                 ))}

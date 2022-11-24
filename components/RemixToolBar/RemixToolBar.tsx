@@ -8,7 +8,6 @@ import PromptInstanceAndClassInput from "../PromptInstanceAndClassInput/PromptIn
 import PromptSubmission from "../PromptSubmission/PromptSubmission";
 
 interface IRemixToolBar {
-  sortedData: IPrompt[];
   setSortedData: React.Dispatch<React.SetStateAction<IPrompt[]>>;
   data: IPrompt[];
   userInstanceAndClass: IUserInstanceAndClass;
@@ -18,7 +17,6 @@ interface IRemixToolBar {
 }
 
 const RemixToolBar = ({
-  sortedData,
   setSortedData,
   data,
   userInstanceAndClass,
@@ -30,7 +28,7 @@ const RemixToolBar = ({
 
   useEffect(() => {
     user && setUserSubmissions(extractUserRemixSubmissions(data, user.id));
-  }, [user]);
+  }, [user,data]);
 
   return (
     <div className="flex left-[50%] p-2  space-x-1  justify-center  bg-black/50 rounded-lg">

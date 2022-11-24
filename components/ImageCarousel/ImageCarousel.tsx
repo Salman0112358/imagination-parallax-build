@@ -20,6 +20,7 @@ const ImageCarousel = ({ data }: { data: IPrompt[] }) => {
           <div className="m-auto" key={image.id}>
             <img
               src={image.render_image}
+              alt="preview"
               style={{
                 marginLeft: "auto",
                 marginRight: "auto",
