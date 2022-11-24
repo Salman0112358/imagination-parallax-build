@@ -48,16 +48,12 @@ const PromptInstanceAndClassInput = ({
       />
       {/* Buttons Here */}
 
-
       <button
         className="w-full"
         onClick={() => {
-          localStorage.setItem(
-            "instance",
-            userInstanceAndClass.instancePrompt
-          );
+          localStorage.setItem("instance", userInstanceAndClass.instancePrompt);
           localStorage.setItem("class", userInstanceAndClass.classPrompt);
-          toast.success("Instance & Class Settings Applied!")
+          toast.success("Instance & Class Settings Applied!");
         }}
       >
         Apply
@@ -68,14 +64,12 @@ const PromptInstanceAndClassInput = ({
           setUserInstanceAndClass({ instancePrompt: "", classPrompt: "" });
           localStorage.setItem("instance", "{INSTANCE_PROMPT}");
           localStorage.setItem("class", "{CLASS_PROMPT}");
-          toast.info("Instance & Class Settings Reset!")
+          toast.info("Instance & Class Settings Reset!");
         }}
       >
         Reset
       </button>
     </div>
-
-
   );
 };
 

@@ -10,63 +10,55 @@ interface IPromptListCard {
 }
 
 const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
+  const notify = (message: string) => toast.success(message);
 
-  const notify = (message: string) => toast.success(message,);
-
-  const [render, setRender] = useState(false)
-
+  const [render, setRender] = useState(false);
 
   const supabase = useSupabaseClient();
-  const user = useUser()
+  const user = useUser();
 
   const handleKudos = async (prompt: IPrompt) => {
-    console.log(prompt.id, prompt.username)
-    console.log("Attempting to give kudos!")
-    
-    if (!user) return toast.error("You Must Be Logged In")
+    console.log(prompt.id, prompt.username);
+    console.log("Attempting to give kudos!");
+
+    if (!user) return toast.error("You Must Be Logged In");
 
     try {
-      console.log(render)
+      console.log(render);
 
       const { error } = await supabase
-        .from('kudos')
-        .insert({ user_id: user?.id, remix_prompt_id: prompt.id })
+        .from("kudos")
+        .insert({ user_id: user?.id, remix_prompt_id: prompt.id });
 
       if (!error) {
-        const response = (await supabase.from("remix_prompts").select("kudos")
-          .eq('id', prompt.id)).data
+        const response = (
+          await supabase
+            .from("remix_prompts")
+            .select("kudos")
+            .eq("id", prompt.id)
+        ).data;
 
         if (response) {
-          console.log(response[0].kudos)
-          const { error } = await supabase.from("remix_prompts").update({ kudos: (response[0].kudos + 1) })
-            .eq('id', prompt.id)
-          console.log("like has been registered")
-          toast.success("🎉Kudos!🎉")
+          console.log(response[0].kudos);
+          const { error } = await supabase
+            .from("remix_prompts")
+            .update({ kudos: response[0].kudos + 1 })
+            .eq("id", prompt.id);
+          console.log("like has been registered");
+          toast.success("🎉Kudos!🎉");
         }
-        
-        console.log("added to your kudos list")
 
+        console.log("added to your kudos list");
 
-        setRender((prev) => !prev)
-
-
+        setRender((prev) => !prev);
       } else {
-        console.log("You have already given this post a kudos!")
-        toast.info("You Have Already Given Kudos")
+        console.log("You have already given this post a kudos!");
+        toast.info("You Have Already Given Kudos");
       }
-
-
-
     } catch (error) {
-      console.error(error)
-
+      console.error(error);
     }
-
-
-
-
-  }
-
+  };
 
   return (
     <>
@@ -81,7 +73,7 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
                 userInstanceAndClass.classPrompt
               )
             );
-            notify("Copied")
+            notify("Copied");
           }}
         >
           Copy
@@ -90,7 +82,6 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
           className=" text-center hover:bg-indigo-900 absolute rounded-md left-0 m-1 hidden group-hover:block font-light"
           onClick={async () => {
             await handleKudos(prompt);
-
           }}
         >
           Kudos

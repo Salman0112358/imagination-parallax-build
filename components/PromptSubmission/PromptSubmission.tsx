@@ -115,24 +115,20 @@ const PromptSubmission = () => {
         />
         <button
           className="w-[45%] max-h-[40px] "
-
           onClick={() => document.getElementById("upload-render")?.click()}
         >
           Preview
         </button>
         <button
-            className="w-[45%] max-h-[40px] "
-
+          className="w-[45%] max-h-[40px] "
           onClick={() => {
-            (
-              document.getElementById("prompt-idea") as HTMLInputElement
-            ).value = "";
+            (document.getElementById("prompt-idea") as HTMLInputElement).value =
+              "";
             setPreviewImageUrl("");
           }}
         >
           Clear All
         </button>
-
       </div>
       {/* Image preview box */}
       <div className=" flex justify-center items-center relative outlineBox text-violet-300 h-[60%]">

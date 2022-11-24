@@ -28,9 +28,7 @@ export const GenericModal = ({ children, modalText }: IGenricModal) => {
                   onClick={() => setShowModal((prev) => !prev)}
                 />
                 <div className="bg-black/50 h-screen w-screen ">
-                  <div className="flex justify-center relative">
-                    {children}
-                  </div>
+                  <div className="flex justify-center relative">{children}</div>
                 </div>
               </div>
             </div>

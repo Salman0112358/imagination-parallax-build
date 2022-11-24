@@ -17,10 +17,14 @@ const submitRemixPrompt = async (
     );
   }
 
-  if (window.localStorage.getItem("instance") === null || window.localStorage.getItem("instance") === "{INSTANCE_PROMPT}") {
+  if (
+    window.localStorage.getItem("instance") === null ||
+    window.localStorage.getItem("instance") === "{INSTANCE_PROMPT}"
+  ) {
     return toast.error(
-      'Your prompt must include a valid instance prompt. Go back and click "🖊️ remix" to set it'
-    , {autoClose: 5000, hideProgressBar: false});
+      'Your prompt must include a valid instance prompt. Go back and click "🖊️ remix" to set it',
+      { autoClose: 5000, hideProgressBar: false }
+    );
   } else {
     const imagePublicUrl = await compressInputImageAndUpload(uploadFile, user);
     console.log(imagePublicUrl);
@@ -33,7 +37,9 @@ const submitRemixPrompt = async (
         .single()
     ).data?.username;
 
-    const formattedPromptString = (promptDetails.prompt).replace(localStorage.getItem("instance"), "{INSTANCE_PROMPT}").replace(localStorage.getItem("class"), "{CLASS_PROMPT}")
+    const formattedPromptString = promptDetails.prompt
+      .replace(localStorage.getItem("instance"), "{INSTANCE_PROMPT}")
+      .replace(localStorage.getItem("class"), "{CLASS_PROMPT}");
 
     const { data, error } = await supabaseClient.from("remix_prompts").insert([
       {

@@ -41,9 +41,11 @@ const remixPage = ({ data }: { data: IPrompt[] }) => {
         <ImageGrid>
           {sortedData.map((image: IPrompt) => (
             <div
-              className={` group card ${image.natural_height / image.natural_width > 1 && "card-tall"
-                } ${image.natural_height / image.natural_width < 1 && "card-wide"
-                }   `}
+              className={` group card ${
+                image.natural_height / image.natural_width > 1 && "card-tall"
+              } ${
+                image.natural_height / image.natural_width < 1 && "card-wide"
+              }   `}
               key={image.id}
               style={{ backgroundImage: `url('${image.render_image}')` }}
             >

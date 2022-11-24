@@ -34,12 +34,12 @@ const PromptKeywordCounter = ({ data }: IPromptKeywordCounter) => {
 
   return (
     <div className="grid grid-cols-6 gap-4 p-1">
-      {wordCountsArray.slice(0,25).map((word, index) => (
+      {wordCountsArray.slice(0, 25).map((word, index) => (
         <div
           key={index}
           className="text-xl font-light flex items-center justify-center rounded-3xl bg-fuchsia-900/90 p-1"
         >
-          {word[0]} ({word[1]} times) 
+          {word[0]} ({word[1]} times)
         </div>
       ))}
     </div>

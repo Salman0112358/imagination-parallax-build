@@ -12,7 +12,7 @@ const CommunityPage = ({ data, userList }: ICommunityPage) => {
   return (
     <>
       <div className="mt-[8vh]">
-        <AccordionCard data={data} userList={userList}/>
+        <AccordionCard data={data} userList={userList} />
       </div>
     </>
   );
