@@ -1,6 +1,6 @@
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
-import { useRouter } from 'next/router'
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { IPrompt, IUserInstanceAndClass } from "../../typescript";
 import handleCopy from "../../utils/handleCopy";
 import replaceInstanceAndClass from "../../utils/replaceInstanceAndClass";
@@ -11,8 +11,10 @@ interface IPromptListCard {
 
 const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
 
+  const notify = (message: string) => toast.success(message,);
+
   const [render, setRender] = useState(false)
- 
+
 
   const supabase = useSupabaseClient();
   const user = useUser()
@@ -20,9 +22,11 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
   const handleKudos = async (prompt: IPrompt) => {
     console.log(prompt.id, prompt.username)
     console.log("Attempting to give kudos!")
+    
+    if (!user) return toast.error("You Must Be Logged In")
 
     try {
-       console.log(render)
+      console.log(render)
 
       const { error } = await supabase
         .from('kudos')
@@ -37,11 +41,18 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
           const { error } = await supabase.from("remix_prompts").update({ kudos: (response[0].kudos + 1) })
             .eq('id', prompt.id)
           console.log("like has been registered")
+          toast.success("🎉Kudos!🎉")
         }
+        
         console.log("added to your kudos list")
+
+
         setRender((prev) => !prev)
+
+
       } else {
         console.log("You have already given this post a kudos!")
+        toast.info("You Have Already Given Kudos")
       }
 
 
@@ -50,6 +61,8 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
       console.error(error)
 
     }
+
+
 
 
   }
@@ -68,13 +81,17 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
                 userInstanceAndClass.classPrompt
               )
             );
+            notify("Copied")
           }}
         >
           Copy
         </button>
         <button
           className=" text-center hover:bg-indigo-900 absolute rounded-md left-0 m-1 hidden group-hover:block font-light"
-          onClick={async () => await handleKudos(prompt)}
+          onClick={async () => {
+            await handleKudos(prompt);
+
+          }}
         >
           Kudos
         </button>
