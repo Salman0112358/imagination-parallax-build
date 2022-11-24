@@ -28,7 +28,7 @@ const RemixToolBar = ({
 
   useEffect(() => {
     user && setUserSubmissions(extractUserRemixSubmissions(data, user.id));
-  }, [user,data]);
+  }, [user, data]);
 
   return (
     <div className="flex left-[50%] p-2  space-x-1  justify-center  bg-black/50 rounded-lg">
