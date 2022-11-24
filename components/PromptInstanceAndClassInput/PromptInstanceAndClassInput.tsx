@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 import {
   IPromptInstanceAndClassInput,
   IUserInstanceAndClass,
@@ -19,56 +20,62 @@ const PromptInstanceAndClassInput = ({
     setUserInstanceAndClass({ ...userInstanceAndClass, [name]: value });
   };
   return (
-    <div className="outlineBox w-[50vw] p-1">
-      <div className="flex items-center space-x-5">
-        <input
-          name="instancePrompt"
-          className="promptInput h-[5vh]"
-          placeholder="Instance Prompt "
-          onChange={(e) =>
-            handleInstanceAndClass(
-              userInstanceAndClass,
-              setUserInstanceAndClass,
-              e
-            )
-          }
-        />
-        <input
-          name="classPrompt"
-          className="promptInput h-[5vh]"
-          placeholder="Class Prompt"
-          onChange={(e) =>
-            handleInstanceAndClass(
-              userInstanceAndClass,
-              setUserInstanceAndClass,
-              e
-            )
-          }
-        />
-        <button
-          className=""
-          onClick={() => {
-            setUserInstanceAndClass({ instancePrompt: "", classPrompt: "" });
-            localStorage.setItem("instance", "{INSTANCE_PROMPT}");
-            localStorage.setItem("class", "{CLASS_PROMPT}");
-          }}
-        >
-          Reset
-        </button>
-        <button
-          className=""
-          onClick={() => {
-            localStorage.setItem(
-              "instance",
-              userInstanceAndClass.instancePrompt
-            );
-            localStorage.setItem("class", userInstanceAndClass.classPrompt);
-          }}
-        >
-          Apply
-        </button>
-      </div>
+    <div className=" flex flex-col space-y-4 justify-center items-center  w-[80vw] h-screen">
+      {/* Inputs here */}
+      <input
+        name="instancePrompt"
+        className="promptInput h-[5vh]"
+        placeholder="Instance Prompt "
+        onChange={(e) =>
+          handleInstanceAndClass(
+            userInstanceAndClass,
+            setUserInstanceAndClass,
+            e
+          )
+        }
+      />
+      <input
+        name="classPrompt"
+        className="promptInput h-[5vh]"
+        placeholder="Class Prompt"
+        onChange={(e) =>
+          handleInstanceAndClass(
+            userInstanceAndClass,
+            setUserInstanceAndClass,
+            e
+          )
+        }
+      />
+      {/* Buttons Here */}
+
+
+      <button
+        className="w-full"
+        onClick={() => {
+          localStorage.setItem(
+            "instance",
+            userInstanceAndClass.instancePrompt
+          );
+          localStorage.setItem("class", userInstanceAndClass.classPrompt);
+          toast.success("Instance & Class Settings Applied!")
+        }}
+      >
+        Apply
+      </button>
+      <button
+        className="w-full"
+        onClick={() => {
+          setUserInstanceAndClass({ instancePrompt: "", classPrompt: "" });
+          localStorage.setItem("instance", "{INSTANCE_PROMPT}");
+          localStorage.setItem("class", "{CLASS_PROMPT}");
+          toast.info("Instance & Class Settings Reset!")
+        }}
+      >
+        Reset
+      </button>
     </div>
+
+
   );
 };
 
