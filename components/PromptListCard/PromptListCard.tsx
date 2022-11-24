@@ -1,4 +1,6 @@
-import React from "react";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
+import { useRouter } from 'next/router'
+import React, { useState } from "react";
 import { IPrompt, IUserInstanceAndClass } from "../../typescript";
 import handleCopy from "../../utils/handleCopy";
 import replaceInstanceAndClass from "../../utils/replaceInstanceAndClass";
@@ -8,6 +10,51 @@ interface IPromptListCard {
 }
 
 const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
+
+  const [render, setRender] = useState(false)
+ 
+
+  const supabase = useSupabaseClient();
+  const user = useUser()
+
+  const handleKudos = async (prompt: IPrompt) => {
+    console.log(prompt.id, prompt.username)
+    console.log("Attempting to give kudos!")
+
+    try {
+       console.log(render)
+
+      const { error } = await supabase
+        .from('kudos')
+        .insert({ user_id: user?.id, remix_prompt_id: prompt.id })
+
+      if (!error) {
+        const response = (await supabase.from("remix_prompts").select("kudos")
+          .eq('id', prompt.id)).data
+
+        if (response) {
+          console.log(response[0].kudos)
+          const { error } = await supabase.from("remix_prompts").update({ kudos: (response[0].kudos + 1) })
+            .eq('id', prompt.id)
+          console.log("like has been registered")
+        }
+        console.log("added to your kudos list")
+        setRender((prev) => !prev)
+      } else {
+        console.log("You have already given this post a kudos!")
+      }
+
+
+
+    } catch (error) {
+      console.error(error)
+
+    }
+
+
+  }
+
+
   return (
     <>
       <div className="relative opacity-90">
@@ -27,7 +74,7 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
         </button>
         <button
           className=" text-center hover:bg-indigo-900 absolute rounded-md left-0 m-1 hidden group-hover:block font-light"
-          onClick={() => {}}
+          onClick={async () => await handleKudos(prompt)}
         >
           Kudos
         </button>

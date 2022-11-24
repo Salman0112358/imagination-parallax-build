@@ -1,8 +1,5 @@
 import React from "react";
 import AccordionCard from "../../components/AccordionCard/AccordionCard";
-import MostLikedPost from "../../components/MostLikedPost/MostLikedPost";
-import PromptKeywordCounter from "../../components/PromptKeywordCounter/PromptKeywordCounter";
-import UsersList from "../../components/UsersList/UsersList";
 import { IPrompt, IUserProfile } from "../../typescript";
 import { supabase } from "../../utils/supabaseClient";
 
@@ -15,8 +12,7 @@ const CommunityPage = ({ data, userList }: ICommunityPage) => {
   return (
     <>
       <div className="mt-[8vh]">
-        <AccordionCard data={data} userList={userList} />
-        {/* <MostLikedPost data={data} /> */}
+        <AccordionCard data={data} userList={userList}/>
       </div>
     </>
   );
