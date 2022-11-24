@@ -7,12 +7,11 @@ module.exports = {
   theme: {
     extend: {
       display: ["group-hover"],
-    colors: {
+      colors: {
         gray: {
-            '900': '#0f1011'
-        }
-    },
-
+          900: "#0f1011",
+        },
+      },
     },
   },
   plugins: [require("tailwind-scrollbar")({ nocompatible: true })],

@@ -8,8 +8,6 @@ interface IPromptListCard {
 }
 
 const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
-
-
   return (
     <>
       <div className="relative opacity-90">
@@ -26,11 +24,10 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
           }}
         >
           Copy
-        </button>    
+        </button>
         <button
           className=" text-center hover:bg-indigo-900 absolute rounded-md left-0 m-1 hidden group-hover:block font-light"
-          onClick={() => {
-          }}
+          onClick={() => {}}
         >
           Kudos
         </button>
@@ -40,14 +37,16 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
           Posted by : {prompt.username}
         </span>
         <span className="text-base inline-block bg-black rounded-md px-3 py-1 text-white">
-        Kudos ❤️ : {prompt.kudos}
+          Kudos ❤️ : {prompt.kudos}
         </span>
         <span className="text-base inline-block bg-black rounded-md px-3 py-1 text-white">
-          Prompt : {replaceInstanceAndClass(
+          Prompt :{" "}
+          {replaceInstanceAndClass(
             prompt.prompt,
             userInstanceAndClass.instancePrompt,
             userInstanceAndClass.classPrompt
-          ).slice(0, 80)}...
+          ).slice(0, 80)}
+          ...
         </span>
         {/* <span className="inline-block bg-black rounded-full px-3 py-1 text-white">
           Dimensions : {prompt.natural_width} X {prompt.natural_height}

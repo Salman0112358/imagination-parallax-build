@@ -14,11 +14,9 @@ interface ICommunityPage {
 const CommunityPage = ({ data, userList }: ICommunityPage) => {
   return (
     <>
-      <div className="flex flex-col mt-[8vh]">
-        <AccordionCard data={data}/>
-        <UsersList userList={userList} />
+      <div className="mt-[8vh]">
+        <AccordionCard data={data} userList={userList} />
         {/* <MostLikedPost data={data} /> */}
-        <PromptKeywordCounter data={data} />
       </div>
     </>
   );

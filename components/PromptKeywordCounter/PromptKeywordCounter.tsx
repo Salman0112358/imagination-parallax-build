@@ -33,26 +33,15 @@ const PromptKeywordCounter = ({ data }: IPromptKeywordCounter) => {
   }
 
   return (
-    <div className=" scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100 p-4 w-full h-[75vh] max-w-md bg-white rounded-lg border shadow-md sm:p-8 dark:bg-black/50 dark:border-gray-700  overflow-auto     ">
-      <div className="flex justify-between items-center mb-4">
-        <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
-          Most Used Prompt Words{" "}
-        </h5>
-      </div>
-      <div className="flow-root">
-        <ol className="space-y-1 max-w-md list-decimal list-inside text-gray-500 dark:text-gray-400">
-          {wordCountsArray.map((word) => (
-            <li key={word[0]}>
-              <span className="font-semibold text-xl text-gray-900 dark:text-white">
-                {word[0]}
-              </span>{" "}
-              <span className="font-semibold text-gray-900 dark:text-white">
-                ({word[1]} times)
-              </span>
-            </li>
-          ))}
-        </ol>
-      </div>
+    <div className="grid grid-cols-6 gap-4 p-1">
+      {wordCountsArray.slice(0,25).map((word, index) => (
+        <div
+          key={index}
+          className="text-xl font-light flex items-center justify-center rounded-3xl bg-fuchsia-900/90 p-1"
+        >
+          {word[0]} ({word[1]} times) 
+        </div>
+      ))}
     </div>
   );
 };

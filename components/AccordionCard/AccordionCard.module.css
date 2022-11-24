@@ -1,22 +1,21 @@
-
 .card.active {
-    flex-grow: 10;
-    max-width: 100%;
-  }
-  .card.active .label {
-    transform: translateX(0.5rem);
-  }
-  .card.active .label .content > * {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  .card.active .shadow {
-    opacity: 0.75;
-    transform: translateY(0);
-  }
-  
-  .transitionBase {
-    transition-duration: 700ms;
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.2, 1, 0.25, 1);
-  }
+  flex-grow: 10;
+  max-width: 100%;
+}
+.card.active .label {
+  transform: translateX(0.5rem);
+}
+.card.active .label .content > * {
+  opacity: 1;
+  transform: translateX(0);
+}
+.card.active .shadow {
+  opacity: 0.75;
+  transform: translateY(0);
+}
+
+.transitionBase {
+  transition-duration: 700ms;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.25, 1);
+}
