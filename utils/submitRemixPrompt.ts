@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import cleanUpRemixPromotSubmission from "./cleanUpRemixPromptSubmission";
 import compressInputImageAndUpload from "./compressInputImageAndUpload";
 
@@ -16,13 +17,10 @@ const submitRemixPrompt = async (
     );
   }
 
-  if (
-    !promptDetails.prompt.includes("{INSTANCE_PROMPT}") &&
-    !promptDetails.prompt.includes("{CLASS PROMPT}")
-  ) {
-    return window.alert(
-      "Your Prompt must include placeholders for the INSTANCE and CLASS"
-    );
+  if (window.localStorage.getItem("instance") === null || window.localStorage.getItem("instance") === "{INSTANCE_PROMPT}") {
+    return toast.error(
+      'Your prompt must include a valid instance prompt. Go back and click "🖊️ remix" to set it'
+    , {autoClose: 5000, hideProgressBar: false});
   } else {
     const imagePublicUrl = await compressInputImageAndUpload(uploadFile, user);
     console.log(imagePublicUrl);
@@ -35,9 +33,11 @@ const submitRemixPrompt = async (
         .single()
     ).data?.username;
 
+    const formattedPromptString = (promptDetails.prompt).replace(localStorage.getItem("instance"), "{INSTANCE_PROMPT}").replace(localStorage.getItem("class"), "{CLASS_PROMPT}")
+
     const { data, error } = await supabaseClient.from("remix_prompts").insert([
       {
-        prompt: promptDetails.prompt,
+        prompt: formattedPromptString,
         render_image: imagePublicUrl,
         user_id: user?.id,
         username,

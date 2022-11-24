@@ -37,7 +37,7 @@ const RemixToolBar = ({
       <button
         title="Sort By Random"
         onClick={() => {
-          setSortedData([...randomSortArray(sortedData)]);
+          setSortedData([...randomSortArray([...data])]);
         }}
       >
         🎲 Random
