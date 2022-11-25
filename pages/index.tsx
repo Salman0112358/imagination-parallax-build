@@ -86,5 +86,8 @@ export async function getServerSideProps() {
   } catch (error) {
     console.error(error);
     console.log("No Images Retrieved");
+    const data : any = []
+
+    return { props: { data } };
   }
 }
