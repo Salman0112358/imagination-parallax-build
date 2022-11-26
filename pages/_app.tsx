@@ -35,6 +35,8 @@ export default function App({
           pauseOnHover
           theme="dark"
         /> */}
+        {/* when I uncomment the ToastContainer, the app gets a TypeError but if I then uncomment it again it works fine
+        why is this happening? Gotta figure this out */}
       </SessionContextProvider>
     </>
   );
