@@ -26,9 +26,13 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
     try {
       console.log(render);
 
+      console.log(user.id, prompt.id )
+
       const { error } = await supabase
         .from("kudos")
         .insert({ user_id: user?.id, remix_prompt_id: prompt.id });
+
+        console.log(error)
 
       if (!error) {
         const response = (
