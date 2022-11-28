@@ -10,6 +10,9 @@ const RemixPage = ({ data }: { data: IPrompt[] }) => {
   const [userInstanceAndClass, setUserInstanceAndClass] =
     useState<IUserInstanceAndClass>({ instancePrompt: "", classPrompt: "" });
   const [sortedData, setSortedData] = useState<IPrompt[]>(data);
+  const [render, setRender] = useState(false);
+
+  console.log(render)
 
   useEffect(() => {
     console.log(localStorage.getItem("class"));
@@ -52,6 +55,8 @@ const RemixPage = ({ data }: { data: IPrompt[] }) => {
                 <PromptListCard
                   prompt={image}
                   userInstanceAndClass={userInstanceAndClass}
+                  render={render}
+                  setRender={setRender}
                 />
               </div>
             </div>

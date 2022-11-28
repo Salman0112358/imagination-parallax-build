@@ -7,12 +7,13 @@ import replaceInstanceAndClass from "../../utils/replaceInstanceAndClass";
 interface IPromptListCard {
   prompt: IPrompt;
   userInstanceAndClass: IUserInstanceAndClass;
+  render: boolean;
+  setRender: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
+const PromptListCard = ({ prompt, userInstanceAndClass, render, setRender }: IPromptListCard) => {
   const notify = (message: string) => toast.success(message);
 
-  const [render, setRender] = useState(false);
 
   const supabase = useSupabaseClient();
   const user = useUser();
@@ -24,15 +25,9 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
     if (!user) return toast.error("You Must Be Logged In");
 
     try {
-      console.log(render);
-
-      console.log(user.id, prompt.id )
-
       const { error } = await supabase
         .from("kudos")
         .insert({ user_id: user?.id, remix_prompt_id: prompt.id });
-
-        console.log(error)
 
       if (!error) {
         const response = (
@@ -53,8 +48,6 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
         }
 
         console.log("added to your kudos list");
-
-        setRender((prev) => !prev);
       } else {
         console.log("You have already given this post a kudos!");
         toast.info("You Have Already Given Kudos");
@@ -86,6 +79,7 @@ const PromptListCard = ({ prompt, userInstanceAndClass }: IPromptListCard) => {
           className=" text-center hover:bg-indigo-900 absolute rounded-md left-0 m-1 hidden group-hover:block font-light"
           onClick={async () => {
             await handleKudos(prompt);
+            setRender((prev) => !prev);
           }}
         >
           Kudos
