@@ -137,7 +137,7 @@ const PromptSubmission = () => {
           width={512}
           height={512}
           alt="preview"
-          className=" preview-image relative object-cover h-full w-full"
+          className=" preview-image relative object-contain h-full w-full"
         />
         {previewImageUrl && (
           <ImCross
