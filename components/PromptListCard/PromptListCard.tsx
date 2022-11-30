@@ -1,5 +1,6 @@
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
-import React, { useState } from "react";
+import React from "react";
+import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { IPrompt, IUserInstanceAndClass } from "../../typescript";
 import handleCopy from "../../utils/handleCopy";
@@ -17,6 +18,7 @@ const PromptListCard = ({ prompt, userInstanceAndClass, render, setRender }: IPr
 
   const supabase = useSupabaseClient();
   const user = useUser();
+  const router = useRouter();
 
   const handleKudos = async (prompt: IPrompt) => {
     console.log(prompt.id, prompt.username);
@@ -48,6 +50,7 @@ const PromptListCard = ({ prompt, userInstanceAndClass, render, setRender }: IPr
         }
 
         console.log("added to your kudos list");
+        router.reload();
       } else {
         console.log("You have already given this post a kudos!");
         toast.info("You Have Already Given Kudos");
@@ -79,7 +82,6 @@ const PromptListCard = ({ prompt, userInstanceAndClass, render, setRender }: IPr
           className=" text-center hover:bg-indigo-900 absolute rounded-md left-0 m-1 hidden group-hover:block font-light"
           onClick={async () => {
             await handleKudos(prompt);
-            setRender((prev) => !prev);
           }}
         >
           Kudos
