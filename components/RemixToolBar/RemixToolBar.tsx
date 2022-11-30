@@ -44,12 +44,20 @@ const RemixToolBar = ({
         🔥 Newest
       </button>
       {user && (
-        <button
-          title="Show Only Your Submissions"
-          onClick={() => setSortedData(userSubmissions)}
-        >
-          👤 Submitted
-        </button>
+        <>
+          <button
+            title="Show Only Your Submissions"
+            onClick={() => setSortedData(userSubmissions)}
+          >
+            👤 Submitted
+          </button>
+          <button
+            title="Show Post You've Liked"
+          >
+            ❤️ Likes
+          </button>
+        </>
+
       )}
       <GenericModal modalText="💡 Upload">
         <PromptSubmission />
