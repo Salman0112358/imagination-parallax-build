@@ -50,7 +50,7 @@ const PromptListCard = ({ prompt, userInstanceAndClass, render, setRender }: IPr
         }
 
         console.log("added to your kudos list");
-        router.reload();
+        setRender((render) => !render)
       } else {
         console.log("You have already given this post a kudos!");
         toast.info("You Have Already Given Kudos");
