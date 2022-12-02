@@ -54,6 +54,7 @@ const PromptInstanceAndClassInput = ({
           localStorage.setItem("instance", userInstanceAndClass.instancePrompt);
           localStorage.setItem("class", userInstanceAndClass.classPrompt);
           toast.success("Instance & Class Settings Applied!");
+          window.alert("Instance & Class Settings Applied!")
         }}
       >
         Apply
@@ -65,6 +66,7 @@ const PromptInstanceAndClassInput = ({
           localStorage.setItem("instance", "{INSTANCE_PROMPT}");
           localStorage.setItem("class", "{CLASS_PROMPT}");
           toast.info("Instance & Class Settings Reset!");
+          window.alert("Instance & Class Settings Reset!");
         }}
       >
         Reset

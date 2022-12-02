@@ -46,6 +46,7 @@ const PromptListCard = ({ prompt, userInstanceAndClass, render, setRender }: IPr
             .update({ kudos: response[0].kudos + 1 })
             .eq("id", prompt.id);
           console.log("like has been registered");
+          window.alert("🎉Kudos!🎉");
           toast.success("🎉Kudos!🎉");
         }
 
@@ -53,6 +54,7 @@ const PromptListCard = ({ prompt, userInstanceAndClass, render, setRender }: IPr
         setRender((render) => !render)
       } else {
         console.log("You have already given this post a kudos!");
+        window.alert("You Have Already Given Kudos");
         toast.info("You Have Already Given Kudos");
       }
     } catch (error) {

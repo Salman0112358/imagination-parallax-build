@@ -1,15 +1,17 @@
+import { SupabaseClient, User } from "@supabase/auth-helpers-react";
 import { toast } from "react-toastify";
+import { IPromptDetails } from "../typescript";
 import cleanUpRemixPromotSubmission from "./cleanUpRemixPromptSubmission";
 import compressInputImageAndUpload from "./compressInputImageAndUpload";
 
 const submitRemixPrompt = async (
-  promptDetails: any,
-  uploadFile: any,
-  dimensions: any,
-  setUploadFile: any,
-  setPreviewImageUrl: any,
-  user: any,
-  supabaseClient: any
+  promptDetails: IPromptDetails,
+  uploadFile: File | null | undefined,
+  dimensions: number[],
+  setUploadFile: React.Dispatch<React.SetStateAction<File | null | undefined>>,
+  setPreviewImageUrl: React.Dispatch<React.SetStateAction<string>>,
+  user: User | null,
+  supabaseClient: SupabaseClient<any, "public", any>
 ) => {
   if (!promptDetails.prompt || !uploadFile || !user) {
     return window.alert(
@@ -18,13 +20,13 @@ const submitRemixPrompt = async (
   }
 
   if (
-    window.localStorage.getItem("instance") === null ||
-    window.localStorage.getItem("instance") === "{INSTANCE_PROMPT}"
+    window.localStorage.getItem("instance") === null || window.localStorage.getItem("instance") === "{INSTANCE_PROMPT}" || !promptDetails.prompt.includes(window.localStorage.getItem("instance") as string)
   ) {
-    return toast.error(
-      'Your prompt must include a valid instance prompt. Go back and click "🖊️ remix" to set it',
-      { autoClose: 5000, hideProgressBar: false }
-    );
+    return window.alert('Your prompt must include a valid instance prompt. Go back and click "🖊️ remix" to set it')
+    // return toast.error(
+    //   'Your prompt must include a valid instance prompt. Go back and click "🖊️ remix" to set it',
+    //   { autoClose: 5000, hideProgressBar: false }
+    // );
   } else {
     const imagePublicUrl = await compressInputImageAndUpload(uploadFile, user);
     console.log(imagePublicUrl);
@@ -38,8 +40,8 @@ const submitRemixPrompt = async (
     ).data?.username;
 
     const formattedPromptString = promptDetails.prompt
-      .replace(localStorage.getItem("instance"), "{INSTANCE_PROMPT}")
-      .replace(localStorage.getItem("class"), "{CLASS_PROMPT}");
+      .replace(localStorage.getItem("instance") as string, "{INSTANCE_PROMPT}")
+      .replace(localStorage.getItem("class") as string, "{CLASS_PROMPT}");
 
     const { data, error } = await supabaseClient.from("remix_prompts").insert([
       {
